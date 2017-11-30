@@ -1,0 +1,5 @@
+type Query {
+  getUser(id: String!): User
+  getAllUsers: [User]
+  testString: String
+}
