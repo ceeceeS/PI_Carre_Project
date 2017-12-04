@@ -17,6 +17,25 @@ const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
 });
+/*var graphql = require ('graphql').graphql  
+var query = `query IntrospectionQuery {
+    __schema {
+      types {
+        ...FullType
+      }
+    }
+  }
+
+  fragment FullType on __Type {
+    name
+    kind
+    fields(includeDeprecated: false) {
+      name
+    }
+  }`;
+graphql(schema, query).then( function(result) {  
+  console.log(JSON.stringify(result,null," "));
+});*/
 
 const PORT = 3000;
 
@@ -42,7 +61,7 @@ app.get('/graphiql', graphiqlExpress({ endpointURL: '/graphql' })); // if you wa
 // ));
 mongoose.connect('mongodb://localhost:27017/coucou', {useMongoClient: true}).then(
   () => {
-    console.log('Conectado a Mongo!!!!')
+    console.log('Connecting to MongoDB')
     app.listen(PORT, ()=>{
       console.log('Running GRAPHQL server...');
     });

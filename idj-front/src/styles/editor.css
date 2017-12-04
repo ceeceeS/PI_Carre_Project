@@ -1,0 +1,26 @@
+.editor{
+    padding:10px;
+    border-right:solid 1px #E3E2E2;
+    background-color: #ECEAEA;
+}
+.editor__item{
+    display: block;
+    margin:10px 0;
+}
+.editor__item input[type="checkbox"] {
+  clear: left;
+  position: relative;
+  margin:0;
+}
+
+.editor__item label{
+    margin:0 0 0 5px;
+    clear: left;
+    position: relative;
+    text-decoration: none;
+    cursor: pointer;
+}
+.editor__item label, .editor__item input{
+    display: inline-block;
+    vertical-align: middle;
+}
