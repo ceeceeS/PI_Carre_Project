@@ -17,23 +17,18 @@ class RequestEditor extends Component {
       options: []
     }
   }
-
-
-    onChange(e) {
+  
+  onChange(e) {
     // current array of options
     const options = this.state.options
-    let index
+    let index;
 
     // check if the check box is checked or unchecked
     if (e.target.checked) {
-      // add the numerical value of the checkbox to options array
+       // add the numerical value of the checkbox to options array
        options.push(e.target.value)
-     console.log(e.target.value)
-        
-      
-// userItem = (user,i)=> key={i}> for (option in options) {{user.option},}
-
-
+       console.log(e.target.value)
+       // userItem = (user,i)=> key={i}> for (option in options) {{user.option},}
     } else {
       // or remove the value from the unchecked checkbox from the array
       index = options.indexOf(+e.target.value)
@@ -43,14 +38,9 @@ class RequestEditor extends Component {
     // update the state with the new array of options
     this.setState({ options: options })
     console.log(this.state.options);
-
-    
-
   }
-
   
-
-   render() {
+  render() {
     if (this.props.data.loading) {
             return <div>Loading</div>;
         }
@@ -72,16 +62,10 @@ class RequestEditor extends Component {
             <input type="checkbox" value="birthday" onChange={this.onChange.bind(this)} />
           </div>
         </form>
-
         <div className="selected-items">
-
-         
-           
             {this.props.data.getAllUsers.map((users) => <li key={users}> 
                 {this.state.options.map((i) => users[i])}</li>)}
-            
         </div>
-        
       </main>
     )
   }
