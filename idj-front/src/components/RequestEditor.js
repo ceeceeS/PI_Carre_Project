@@ -27,9 +27,8 @@ class RequestEditor extends Component {
 
     }
   }
-
-
-    onChange(e) {
+  
+  onChange(e) {
     // current array of options
     const options = this.state.options
     const cars = this.state.cars
@@ -60,15 +59,9 @@ class RequestEditor extends Component {
     // update the state with the new array of options
     this.setState({ options: options })
     console.log(this.state.options);
-
-    
-
   }
-
   
-
-   render() {
-
+  render() {
     if (this.props.data.loading) {
             return <div>Loading</div>;
         }

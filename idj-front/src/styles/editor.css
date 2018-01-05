@@ -1,3 +1,26 @@
+.toolbar{
+    color: whitesmoke;
+    background-color: #0066cc;
+    box-shadow: 0 0 0.5em black;
+}
+.toolbar a{
+    text-decoration: none;
+    color: whitesmoke;
+}
+.toolbar__title{
+    padding:20px;
+    line-height: 19px;
+    font-size: 20px;
+    color:whitesmoke;
+}
+.toolbar__nav{
+    padding: 20px;
+    text-align: right;
+}
+.toolbar__nav a{
+    margin: 0 10px;
+    text-align: right;
+}
 .editor{
     padding:10px;
     border-right:solid 1px #E3E2E2;
