@@ -9,6 +9,7 @@ import { withRouter } from 'react-router'
 import Dashboard from './dashboard'
 import '../styles/home.css'
 
+<<<<<<< HEAD
 
 // const query = gql`{
 //   getAllUsers {
@@ -33,6 +34,8 @@ console.log(this.props.getAllUsers)
     } */
 
 // const userItem = (user,i)=><li key={i}> {user._id},  {user.displayName}, {user.email},{user.cars.map( (car,i)=><p key={i}>{car.model}</p> )}</li>
+=======
+>>>>>>> 5e0e6c87f90f7f5941da8b46850af15801f14fd0
 class Home extends Component {
  render() {
    return (
