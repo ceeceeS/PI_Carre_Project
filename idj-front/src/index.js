@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import Dashboard from './routes/index';
-//import Home from './routes/home';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { ApolloProvider } from 'react-apollo';
@@ -27,8 +25,6 @@ const Approot =
   </ApolloProvider>
 </BrowserRouter>
 
-// ReactDOM.render(App, document.getElementById('root'));
-// registerServiceWorker();
 
 ReactDOM.render(Approot, document.getElementById('root'));
-registerServiceWorker() ;
+registerServiceWorker();

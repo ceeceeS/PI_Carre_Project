@@ -10,19 +10,19 @@ import Dashboard from './dashboard'
 import '../styles/home.css'
 
 
-const query = gql`{
-  getAllUsers {
-  	_id
-    displayName
-    email
-    birthday
-    cars{
-      _id
-      model
-    }
-  }
-}
-`;
+// const query = gql`{
+//   getAllUsers {
+//   	_id
+//     displayName
+//     email
+//     birthday
+//     cars{
+//       _id
+//       model
+//     }
+//   }
+// }
+// `;
 
  /*const usersToRender = this.props.getAllUsers
 console.log(this.props.getAllUsers)
