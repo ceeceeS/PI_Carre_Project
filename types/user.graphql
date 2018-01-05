@@ -1,3 +1,4 @@
+
 type User {
   _id: String
   displayName: String
@@ -14,4 +15,5 @@ input InputUser {
   firstName: String!
   lastName: String!
   birthday: String!
+  
 }

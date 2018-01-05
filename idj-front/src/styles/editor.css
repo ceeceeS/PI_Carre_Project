@@ -10,8 +10,8 @@
 .editor__item input[type="checkbox"] {
   clear: left;
   position: relative;
-  margin:0;
-}
+  margin:15px;
+} 
 
 .editor__item label{
     margin:0 0 0 5px;

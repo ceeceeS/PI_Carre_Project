@@ -1,4 +1,6 @@
 import { User } from '../models/index';
+import { Car } from '../models/index';
+
 
 export const Query = {
   testString: () => {

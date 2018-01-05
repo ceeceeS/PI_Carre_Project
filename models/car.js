@@ -8,8 +8,8 @@ const findByOwner = (owner) => {
   return db.find({ owner });
 }
 
-const create = (user) => {
-  return db.create(user);
+const create = (car) => {
+  return db.create(car);
 }
 
 export const Car = {

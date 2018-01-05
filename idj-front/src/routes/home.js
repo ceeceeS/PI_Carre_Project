@@ -11,6 +11,10 @@ const query = gql`{
     displayName
     email
     birthday
+    cars{
+      _id
+      model
+    }
   }
 }
 `;
@@ -23,7 +27,7 @@ console.log(this.props.getAllUsers)
       console.log(key); // here is your column name you are looking for
     } */
 
-const userItem = (user,i)=><li key={i}> {user._id},  {user.displayName}, {user.email},{user.birthday}</li>
+const userItem = (user,i)=><li key={i}> {user._id},  {user.displayName}, {user.email},{user.cars.map( (car,i)=><p key={i}>{car.model}</p> )}</li>
 
 export default graphql(query)(
   ({data: {getAllUsers=[], loading}}) =>[
