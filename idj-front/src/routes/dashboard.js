@@ -6,11 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import Header from '../components/Header'
-<<<<<<< HEAD
 import Toolbar from '../components/toolbar'
-=======
-import Toolbar from '../components/Toolbar'
->>>>>>> 5e0e6c87f90f7f5941da8b46850af15801f14fd0
 import RequestEditor from '../components/RequestEditor'
 import '../styles/index.css'
 

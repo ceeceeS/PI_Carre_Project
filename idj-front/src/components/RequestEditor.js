@@ -31,27 +31,6 @@ class RequestEditor extends Component {
   onChange(e) {
     // current array of options
     const options = this.state.options
-<<<<<<< HEAD
-    const cars = this.state.cars
-    const attr = this.state.attr
-    let index
-
-    // check if the check box is checked or unchecked
-    if (e.target.checked) {
-      
-     
-      // add the numerical value of the checkbox to options array
-            options.push(e.target.value)
-        //options.push(attr)
-          
-     console.log(e.target.value)
-     console.log(e.target.name)
-        
-      
-// userItem = (user,i)=> key={i}> for (option in options) {{user.option},}
-
-
-=======
     let index;
 
     // check if the check box is checked or unchecked
@@ -60,7 +39,6 @@ class RequestEditor extends Component {
        options.push(e.target.value)
        console.log(e.target.value)
        // userItem = (user,i)=> key={i}> for (option in options) {{user.option},}
->>>>>>> 5e0e6c87f90f7f5941da8b46850af15801f14fd0
     } else {
       // or remove the value from the unchecked checkbox from the array
       index = options.indexOf(+e.target.value)
@@ -105,7 +83,6 @@ class RequestEditor extends Component {
             <label>birthday</label>
             <input type="checkbox" value="birthday" onChange={this.onChange.bind(this)} />
           </div>
-<<<<<<< HEAD
           <div className = "editor__item">
             <label>cars</label>
             <input type="checkbox"  value="cars" onChange={this.onChange.bind(this)} />
@@ -136,14 +113,6 @@ class RequestEditor extends Component {
               i == "cars"? users[i].map((j)=>j.model) :users[i])}</li>)}
         </div>
       ]
-=======
-        </form>
-        <div className="selected-items">
-            {this.props.data.getAllUsers.map((users) => <li key={users}> 
-                {this.state.options.map((i) => users[i])}</li>)}
-        </div>
-      </main>
->>>>>>> 5e0e6c87f90f7f5941da8b46850af15801f14fd0
     )
   }
 
