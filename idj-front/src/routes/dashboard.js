@@ -22,6 +22,7 @@ class Dashboard extends Component {
           <div className="col-sm-4 col-md-2 col-lg-2">
             <RequestEditor/>
           </div>
+          <p>jej</p>
         </div>
       </div>
     </div>
