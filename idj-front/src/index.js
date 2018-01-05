@@ -27,13 +27,8 @@ const Approot =
   </ApolloProvider>
 </BrowserRouter>
 
-<<<<<<< HEAD
 // ReactDOM.render(App, document.getElementById('root'));
 // registerServiceWorker();
 
 ReactDOM.render(Approot, document.getElementById('root'));
-registerServiceWorker();
-=======
-ReactDOM.render(Approot, document.getElementById('root'));
-registerServiceWorker();
->>>>>>> 5e0e6c87f90f7f5941da8b46850af15801f14fd0
+registerServiceWorker() ;
