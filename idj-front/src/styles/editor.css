@@ -47,3 +47,15 @@
     display: inline-block;
     vertical-align: middle;
 }
+
+.result{
+    margin:10px;
+}
+.editor__label:not(:first-child){
+    border-left:none;
+}
+.editor__label, .editor__label:first-child {
+    border:1px solid black;
+    display: inline;
+    padding: 5px;
+}

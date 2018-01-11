@@ -6,7 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import Header from '../components/Header'
-import Toolbar from '../components/toolbar'
+import Toolbar from '../components/Toolbar'
 import RequestEditor from '../components/RequestEditor'
 import '../styles/index.css'
 
@@ -18,12 +18,10 @@ class Dashboard extends Component {
     <div>
       <div className="content">
         <Toolbar />
-        <div className="row">
-          <div className="col-sm-4 col-md-2 col-lg-2">
-            <RequestEditor/>
-          </div>
         
-        </div>
+          
+            <RequestEditor/>
+        
       </div>
     </div>
     )

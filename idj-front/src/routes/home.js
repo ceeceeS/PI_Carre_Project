@@ -57,14 +57,14 @@ class Home extends Component {
             </div>
           </div>
           <div className="row">
-              <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                 <div className="content__section">
                   <p className="content__section__title">About</p>
                   <p>This project is part of a university project</p>
                   <a href="#">Learn more ></a>
                 </div>
               </div>
-              <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                 <div className="content__section">
                   <p className="content__section__title">Why Data Visualisation ?</p>
                   <p>It is a powerful tool to explore data.</p>
