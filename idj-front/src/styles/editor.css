@@ -50,7 +50,7 @@
     vertical-align: middle;
 }
 
-.editor_title
+/* .editor_title
 {
     padding: 2px;
     text-align: center;
@@ -60,11 +60,21 @@
 .editor_title h3
 {
     color: rgb(75, 103, 226);
-}
-
+} */
+/* 
 .editor_result 
 {
     margin: 23px;
     width: 400px;
-
+} */
+.result{
+    margin:10px;
+}
+.editor__label:not(:first-child){
+    border-left:none;
+}
+.editor__label, .editor__label:first-child {
+    border:1px solid black;
+    display: inline;
+    padding: 5px;
 }

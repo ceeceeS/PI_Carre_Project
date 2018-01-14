@@ -15,7 +15,7 @@ class Dashboard extends Component {
 
   render() {
     return (
-    <div>
+    
       <div className="content">
         <Toolbar />
         <div className="row">
@@ -26,7 +26,6 @@ class Dashboard extends Component {
           <RequestEditorForCars/> 
           </div>
         
-        </div>
       </div>
     </div>
     )
