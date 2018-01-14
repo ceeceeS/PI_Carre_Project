@@ -12,4 +12,7 @@ export const Query = {
   getUser: (_, { id }) => {
       return User.findById(id);
   },
+  getAllCars: () =>{
+      return Car.find();
+  },
 };

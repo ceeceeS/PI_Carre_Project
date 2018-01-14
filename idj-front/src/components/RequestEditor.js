@@ -60,9 +60,10 @@ class RequestEditor extends Component {
       <div className = "editor">
       
         <form name ="myform">
-        <div className="row">
-        <div class="col-xs-6 col-md-4">
-        <h3> Users</h3>
+        <div class="form-group">
+        <div className = "editor_title">
+        <h3> Users </h3>
+        </div>
            <div className = "editor__item">
             <label>Full Name</label>
             <input type="checkbox"  value= "displayName" onChange={this.onChange.bind(this)} />
@@ -103,15 +104,15 @@ class RequestEditor extends Component {
             <input type="checkbox" name="cars" value="owner" onChange={this.onChange.bind(this)} />
           </div>
         </div> */}
-       
-        </div>
 
         </form>
       </div>,
-        <div className="row">
-            {this.props.data.getAllUsers.map((users) => <li key={users}> 
-            {this.state.options.map((i) => 
-              i == "cars"? users[i].map((j)=>j.model) :users[i])}</li>)}
+        <div className="col-lg-12 col-xs-6 col-md-4">
+        <div className="editor_result">
+            {this.props.data.getAllUsers.map((users) => <p key={users}> 
+            {this.state.options.map((i) =>
+              i == "cars"? users[i].map((j)=><span> {j.model} {j.registrationNo}</span> ) :<span> {users[i]} </span>)} </p>)}
+        </div>
         </div>
       ]
     )

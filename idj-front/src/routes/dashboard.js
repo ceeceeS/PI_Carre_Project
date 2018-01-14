@@ -9,8 +9,8 @@ import Header from '../components/Header'
 import Toolbar from '../components/toolbar'
 import RequestEditor from '../components/RequestEditor'
 import '../styles/index.css'
-
-
+import RequestEditorForCars from '../components/RequestEditorForCars';
+//   <RequestEditorForCars/> 
 class Dashboard extends Component {
 
   render() {
@@ -19,8 +19,11 @@ class Dashboard extends Component {
       <div className="content">
         <Toolbar />
         <div className="row">
-          <div className="col-sm-4 col-md-2 col-lg-2">
-            <RequestEditor/>
+          <div className="col-sm-4 col-md-2 col-lg-3">
+          <RequestEditor/>
+          </div>
+          <div className="col-sm-4 col-md-2 col-lg-3">
+          <RequestEditorForCars/> 
           </div>
         
         </div>

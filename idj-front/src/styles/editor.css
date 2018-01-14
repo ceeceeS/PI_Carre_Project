@@ -23,27 +23,48 @@
 }
 .editor{
     padding:10px;
+    margin: 30px;
     border-right:solid 1px #E3E2E2;
-    background-color: #ECEAEA;
+    background-color: rgb(206, 222, 238);
 }
 .editor__item{
     display: block;
-    margin:10px 0;
+    margin:2px 0;
 }
 .editor__item input[type="checkbox"] {
   clear: left;
-  position: relative;
-  margin:15px;
+  position: static;
+  margin:0px;
 } 
 
 .editor__item label{
-    margin:0 0 0 5px;
+    margin:13px;
     clear: left;
     position: relative;
     text-decoration: none;
     cursor: pointer;
+    width: 92px;
 }
 .editor__item label, .editor__item input{
     display: inline-block;
     vertical-align: middle;
+}
+
+.editor_title
+{
+    padding: 2px;
+    text-align: center;
+    text-decoration: none;
+    border-bottom:solid 1px rgb(8, 0, 0);
+}
+.editor_title h3
+{
+    color: rgb(75, 103, 226);
+}
+
+.editor_result 
+{
+    margin: 23px;
+    width: 400px;
+
 }

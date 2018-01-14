@@ -45,6 +45,7 @@ input InputCar {
 type Query {
   getUser(id: String!): User
   getAllUsers: [User]
+  getAllCars: [Car]
   testString: String
 }
 

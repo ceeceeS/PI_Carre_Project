@@ -11,9 +11,12 @@ const findByOwner = (owner) => {
 const create = (car) => {
   return db.create(car);
 }
-
+const find = () =>{
+	return db.find();
+};
 export const Car = {
   findById,
   findByOwner,
-  create
+  create,
+  find,
 }
