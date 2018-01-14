@@ -6,7 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import Header from '../components/Header'
-import Toolbar from '../components/toolbar'
+import Toolbar from '../components/Toolbar'
 import RequestEditor from '../components/RequestEditor'
 import '../styles/index.css'
 import RequestEditorForCars from '../components/RequestEditorForCars';
@@ -15,19 +15,13 @@ class Dashboard extends Component {
 
   render() {
     return (
-    
-      <div className="content">
-        <Toolbar />
-        <div className="row">
-          <div className="col-sm-4 col-md-2 col-lg-3">
+      <div>
+        <div className="content">
+          <Toolbar />
           <RequestEditor/>
-          </div>
-          <div className="col-sm-4 col-md-2 col-lg-3">
           <RequestEditorForCars/> 
-          </div>
-        
+        </div>
       </div>
-    </div>
     )
   }
 }

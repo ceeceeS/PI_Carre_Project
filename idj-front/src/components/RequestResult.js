@@ -10,14 +10,32 @@ class RequestResult extends Component {
 
     render() {
 
-        const user = this.props.data;
-            return (
-                <div className="">
-                    {user}
-                </div>
-                
-            )
-        
+        var rows = [];
+        var header = [];
+        var data = this.props.data;
+        var labels = this.props.label;
+
+        labels.forEach(function(lb) {
+            header.push(<td className="editor__label">{lb}</td>);
+        }.bind(this));
+
+        data.forEach(function(user) {
+            rows.push(<tr><td>{user.info}</td></tr>);
+        }.bind(this));
+        //console.log(rows);
+
+        return (
+            <table>
+                <thead>
+                    <tr>
+                        {header}
+                    </tr>
+                </thead>
+                <tbody>
+                    {rows}
+                </tbody>
+            </table>
+        );
     }
 }
 

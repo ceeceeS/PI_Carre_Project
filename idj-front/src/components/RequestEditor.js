@@ -56,14 +56,23 @@ class RequestEditor extends Component {
 
   displayData(){
     //display data in function of labels selected
-    return this.props.data.getAllUsers.map((users) => 
-      this.state.options.map((i) => i == "cars"? users[i].map((j)=>j.model) :
-        <RequestResult key={this.state.options.indexOf(i)} data={users[i]}></RequestResult>
+    var tabledata = [];
+    var i = 0;
+    var taille = this.props.data.getAllUsers.length;
+    //for(var i = 0; i < length*this.state.options.length; i++) {
+      this.props.data.getAllUsers.map((users) =>
+        this.state.options.map((label) => 
+        label == "cars"? users[label].map((j)=>j.model) :
+          tabledata.push({id:this.props.data.getAllUsers.indexOf(users),info:users[label],element:label})
+        )
       )
-    )
+    //}
+    //console.log(tabledata);
+    //console.log(this.state.options);
+    return <RequestResult key={i} data={tabledata} label={this.state.options} taille={taille}></RequestResult>
   }
 
-  getLabel(){
+  /*getLabel(){
     //get and display labels selected : to improve in order to display an array
     return this.state.options.map(
       function (label){
@@ -82,13 +91,12 @@ class RequestEditor extends Component {
         return <Graph key={user} data={JSON.stringify(array)}/>
       }
     )
-  }
+  }*/
   
   render() {
     if (this.props.data.loading) {
             return <div>Loading</div>;
         }
-    const dataToRender = this.getArrayOfData();
 
     return (
       <div className="row">
@@ -146,9 +154,7 @@ class RequestEditor extends Component {
           <div className="result">
             {/*this.props.data.getAllUsers.map((users) => <li key={users}> 
             {this.state.options.map((i) => i == "cars"? users[i].map((j)=>j.model) :users[i])}</li>)*/}
-            { this.getLabel() }
             { this.displayData() }
-            {/* this.getArrayOfData ()*/}
             <Graph/>
           </div>
         </div>

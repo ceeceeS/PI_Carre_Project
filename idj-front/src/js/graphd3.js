@@ -74,9 +74,8 @@ export default class Graph extends Component {
   nbOfCarsbyAge(data){
       //points
       var svg = d3.select(".graphs__scatterplot")
-              .append("svg")
+              /*.append("svg")*/
               .attr("width", 1500)
-              .attr("height", 1000);
       svg.selectAll("circle")
               .data(data)
               .enter()
@@ -116,7 +115,7 @@ export default class Graph extends Component {
       links,
     } = this.state;*/
     const data = [30, 86, 168, 281, 303, 365];
-    var dataset = [
+    const dataset = [
                   [ 5,     20 ],
                   [ 480,   90 ],
                   [ 250,   50 ],
@@ -129,12 +128,10 @@ export default class Graph extends Component {
                   [ 220,   88 ]
               ];
     
-    const dt = this.props.data;
-    console.log(dt)
     return (
       <div className="graphs">
         <div className="graphs__bar">{this.exampleD3(data)}</div>
-        <div className="graphs__scatterplot">{this.nbOfCarsbyAge(dataset)}</div>
+        <svg className="graphs__scatterplot">{this.nbOfCarsbyAge(dataset)}</svg>
       </div>
     );
   }

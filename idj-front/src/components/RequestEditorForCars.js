@@ -44,12 +44,13 @@ class RequestEditorForCars extends Component {
         }
         
 
-   return ([
-   
+   return (
+   <div className="row">
+        <div className="col-xs-12 col-sm-4 col-md-4 col-lg-2">
       <div className = "editor">
       
         <form name ="myform">
-        <div class="form-group">
+        <div className="form-group">
         
         <div className = "editor_title">
             <h3> Cars </h3>
@@ -67,16 +68,17 @@ class RequestEditorForCars extends Component {
         <input type="checkbox" name="cars" value="owner" onChange={this.onChange.bind(this)} />
       </div> */}
     </div>
-        </form>
+      </form>
       </div>
-      ,
-      <div className="col-lg-12 col-xs-6 col-md-4">
+      </div>
+      
+      <div className="col-xs-12 col-sm-8 col-md-8 col-lg-10">
         <div className="editor_result">
             {this.props.data.getAllCars.map((cars) => <p key={cars}> 
             {this.state.optionsCars.map((i) => <span>{cars[i]} </span>)}</p>)}
         </div>
       </div>
-      ]
+    </div>
     )
   }
 
