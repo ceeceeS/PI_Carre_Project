@@ -19,7 +19,6 @@ class Dashboard extends Component {
         <div className="content">
           <Toolbar />
           <RequestEditor/>
-          <RequestEditorForCars/> 
         </div>
       </div>
     )

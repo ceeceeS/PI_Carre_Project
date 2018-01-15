@@ -27,22 +27,27 @@ class RequestEditor extends Component {
     super()
     // initialize your options array on your state
     this.state = {
-      options: []
-      
+      options: [],
+      optionsCars : []
     }
   }
   
   onChange(e) {
     // current array of options
     const options = this.state.options
+    const cars = this.state.cars
     let index;
-
     // check if the check box is checked or unchecked
     if (e.target.checked) {
+    //if (e.target.checked && e.target.name == "cars") {
        // add the numerical value of the checkbox to options array
+       //cars.push(e.target.value)
+       //options[0].push(cars)
+       //console.log(cars)
        options.push(e.target.value)
-       //console.log(e.target.value)
        // userItem = (user,i)=> key={i}> for (option in options) {{user.option},}
+    //}else if(e.target.checked && e.target.name != "cars"){
+      //options.push(e.target.value)
     } else {
       // or remove the value from the unchecked checkbox from the array
       index = options.indexOf(e.target.value)
@@ -51,26 +56,128 @@ class RequestEditor extends Component {
 
     // update the state with the new array of options
     this.setState({ options: options })
-    //console.log(this.state.options);
+    console.log(options);
+  }
+
+  onChangeCar(e) {
+    // current array of options
+    const optionsCars = this.state.optionsCars
+    let index;
+
+    // check if the check box is checked or unchecked
+    if (e.target.checked) {
+       // add the numerical value of the checkbox to options array
+       optionsCars.push(e.target.value)
+       console.log(e.target.value)
+       // userItem = (user,i)=> key={i}> for (option in options) {{user.option},}
+    } else {
+      // or remove the value from the unchecked checkbox from the array
+      index = optionsCars.indexOf(+e.target.value)
+      optionsCars.splice(index, 1)
+    }
+
+    // update the state with the new array of optionsCars
+    this.setState({ optionsCars: optionsCars })
+    console.log(this.state.optionsCars);
   }
 
   displayData(){
     //display data in function of labels selected
-    var tabledata = [];
+
+    /*return this.props.data.getAllUsers.map((users) => <table>
+      {this.state.options.map((label)=> label =="cars"? 
+        users[label].map((car_label)=> this.state.optionsCars.map((carItem) =>car_label[carItem])): 
+          <tbody><tr><td>{users[label]}</td></tr></tbody>)}
+    </table>)*/
+      
+    var cols = [];
+    var rows = [];
+    var result = [[]];
+    var optionsCars = this.state.optionsCars;
+    //console.log(optionsCars)
+    this.state.options.map(function(title){
+      cols.push(title);
+    })
+
+    this.props.data.getAllUsers.map(function(row){
+      rows.push(row);
+    })
+    console.log(rows)
+
+    var thead = cols.map((col) => col =="cars"?
+        optionsCars.map((carItem,j) => <th key={j}>Cars.{carItem}</th>): 
+        <th key={col}>{col}</th>
+    );
+
+    var tbody = rows.map(function(row,i){
+      //console.log(row.row)
+      //if(row.id==i){
+        return (
+          <tr>
+            {cols.map((col,index)=> col =="cars"? /*row[col].length == 0? <td key={index}>test</td>:*/
+            row[col].map((car_label)=>
+              optionsCars.map((carItem,k) => <td key={k}>{car_label[carItem]}</td>)):
+              <td key={index}>{row[col]}</td>)}
+          </tr>
+        );
+      //}
+    })
+    console.log(tbody);
+
+    return <RequestResult tbody={tbody} thead={thead}/>;
+  }
+
+
+    /*var cols = [];
+    var rows = [];
+    var result = [[]];
+
+    this.state.options.map(function(title){
+      cols.push(title);
+    })
+
+    this.props.data.getAllUsers.map(function(row){
+      rows.push(row);
+    })
+    
+    var thead = cols.map(function(col){
+      return <th key={col}>{col}</th>
+    });
+
+    var tbody = rows.map(function(row,i){
+      if(i<rows.length){
+      return cols.map(function (col) {
+        console.log(row[col]);
+          result.push(<td key={row[col]}>{row[col]}</td>);
+          return <tr key={row}>{result}</tr>;
+      });
+    }});
+    console.log(tbody);
+
+    return <RequestResult tbody={tbody} thead={thead}/>;*/
+
+    /*var tabledata = [];
+    var rows =[];
+    var result;
     var i = 0;
     var taille = this.props.data.getAllUsers.length;
+    var test = this.state.options;
     //for(var i = 0; i < length*this.state.options.length; i++) {
-      this.props.data.getAllUsers.map((users) =>
-        this.state.options.map((label) => 
-        label == "cars"? users[label].map((j)=>j.model) :
-          tabledata.push({id:this.props.data.getAllUsers.indexOf(users),info:users[label],element:label})
-        )
-      )
+      this.props.data.getAllUsers.map(function(user){
+        rows.push({data:user});
+        test.map(function(label){
+          result = rows.filter(title => label == title);
+          //label == "cars"? user[label].map((j)=>j.model) :
+          //tabledata.push({info:user[label],element:label})
+          });
+      })
     //}
-    //console.log(tabledata);
+    console.log(rows);
+    console.log(result);
     //console.log(this.state.options);
-    return <RequestResult key={i} data={tabledata} label={this.state.options} taille={taille}></RequestResult>
-  }
+    return <RequestResult key={i} data={rows} label={this.state.options} taille={taille}></RequestResult>
+  }*/
+
 
   /*getLabel(){
     //get and display labels selected : to improve in order to display an array
@@ -100,7 +207,7 @@ class RequestEditor extends Component {
 
     return (
       <div className="row">
-        <div className="col-xs-12 col-sm-4 col-md-4 col-lg-2">
+        <div className="col-xs-12 col-sm-4 col-md-4 col-lg-3">
           <div className = "editor">
             <form name ="myform">
                 <h3> Users</h3>
@@ -145,12 +252,30 @@ class RequestEditor extends Component {
               </div>
             </div> */}
             </div>
-          
-          
-          
-          
+            <div className = "editor">
+              <form name ="myform">
+                <div className="form-group">
+                  <div className = "editor_title">
+                    <h3> Cars </h3>
+                  </div>
+                  <div className = "editor__item">
+                    <label>Model</label>
+                    <input type="checkbox" name="cars" value="model" onChange={this.onChangeCar.bind(this)} />
+                  </div>
+                  <div className = "editor__item">
+                    <label>Registration N° </label>
+                    <input type="checkbox" name="cars" value="registrationNo" onChange={this.onChangeCar.bind(this)} />
+                  </div>
+  {/* <div className = "editor__item">
+      <label>Owner</label>
+      <input type="checkbox" name="cars" value="owner" onChange={this.onChange.bind(this)} />
+    </div> */}
+                </div>
+              </form>
+            </div>
           </div>
-        <div className="col-xs-12 col-sm-8 col-md-8 col-lg-10">
+
+        <div className="col-xs-12 col-sm-8 col-md-8 col-lg-9">
           <div className="result">
             {/*this.props.data.getAllUsers.map((users) => <li key={users}> 
             {this.state.options.map((i) => i == "cars"? users[i].map((j)=>j.model) :users[i])}</li>)*/}
@@ -158,7 +283,7 @@ class RequestEditor extends Component {
             <Graph/>
           </div>
         </div>
-      </div>
+        </div>
     )
   }
 

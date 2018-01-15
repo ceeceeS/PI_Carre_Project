@@ -12,31 +12,72 @@ class RequestResult extends Component {
 
         var rows = [];
         var header = [];
-        var data = this.props.data;
-        var labels = this.props.label;
+        var data = this.props.tbody;
+        var labels = this.props.thead;
 
-        labels.forEach(function(lb) {
-            header.push(<td className="editor__label">{lb}</td>);
+        /*labels.forEach(function(lb) {
+            header.push(<th className="editor__label">{lb}</th>);
         }.bind(this));
-
+      
+       
         data.forEach(function(user) {
-            rows.push(<tr><td>{user.info}</td></tr>);
-        }.bind(this));
+        
+           rows.push(<tr><td>{user.info}</td></tr>);
+        }.bind(this));*/
+        
         //console.log(rows);
 
         return (
             <table>
                 <thead>
-                    <tr>
-                        {header}
-                    </tr>
+                <tr>
+                
+                        {labels}
+                    
+                </tr>
                 </thead>
                 <tbody>
-                    {rows}
+                    {data}
                 </tbody>
             </table>
         );
+
+        /*
+        var rows = [];
+        var header = [];
+        var data = this.props.data;
+        var labels = this.props.label;
+
+        labels.forEach(function(lb,i) {
+             header.push(<td className="editor__label">{lb}</td>);
+        }.bind(this));
+
+        //const result = data.filter(use => use.element == labels[i]);
+        data.forEach(function(user,i) {
+            //for(var i=0;i<labels.length;i++){
+                console.log(user);
+                //console.log(result);
+                //<tr key={i}>
+                {rows.push(<td>{user.info}</td>)}
+                //</tr>
+            //}
+        }.bind(this));
+        //console.log(rows);
+
+        return (
+            <table className="MyClassName">
+                <thead>
+                    <tr>{labels}</tr>
+                </thead>
+                <tbody>
+                    {data}
+                </tbody>
+            </table>
+        )*/
     }
 }
 
 export default RequestResult
+
+
+

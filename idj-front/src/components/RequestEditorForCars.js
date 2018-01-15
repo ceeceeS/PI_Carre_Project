@@ -46,7 +46,7 @@ class RequestEditorForCars extends Component {
 
    return (
    <div className="row">
-        <div className="col-xs-12 col-sm-4 col-md-4 col-lg-2">
+        <div className="col-xs-12 col-sm-4 col-md-4 col-lg-3">
       <div className = "editor">
       
         <form name ="myform">
@@ -72,7 +72,7 @@ class RequestEditorForCars extends Component {
       </div>
       </div>
       
-      <div className="col-xs-12 col-sm-8 col-md-8 col-lg-10">
+      <div className="col-xs-12 col-sm-8 col-md-8 col-lg-9">
         <div className="editor_result">
             {this.props.data.getAllCars.map((cars) => <p key={cars}> 
             {this.state.optionsCars.map((i) => <span>{cars[i]} </span>)}</p>)}
