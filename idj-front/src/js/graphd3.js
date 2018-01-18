@@ -63,7 +63,7 @@ export default class Graph extends Component {
   exampleD3(data){
     d3.select(".graphs__bar")
     .selectAll("div")
-    .data(data)
+      .data(data)
       .enter()
       .append("div")
       .style("width", 0)
@@ -114,7 +114,7 @@ export default class Graph extends Component {
       nodes,
       links,
     } = this.state;*/
-    const data = [30, 86, 168, 281, 303, 365];
+    var data = this.props.data;
     const dataset = [
                   [ 5,     20 ],
                   [ 480,   90 ],

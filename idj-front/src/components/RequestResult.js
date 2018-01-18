@@ -5,16 +5,17 @@ import '../styles/editor.css'
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag'
 import Button from '../../node_modules/react-bootstrap/lib/Button';
+import Graph from '../js/graphd3'
 
 class RequestResult extends Component {
 
     render() {
 
-        var rows = [];
-        var header = [];
+        //var rows = [];
+        //var header = [];
         var data = this.props.tbody;
         var labels = this.props.thead;
-
+        
         /*labels.forEach(function(lb) {
             header.push(<th className="editor__label">{lb}</th>);
         }.bind(this));
@@ -28,18 +29,19 @@ class RequestResult extends Component {
         //console.log(rows);
 
         return (
-            <table>
-                <thead>
-                <tr>
-                
-                        {labels}
-                    
-                </tr>
-                </thead>
-                <tbody>
-                    {data}
-                </tbody>
-            </table>
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            {labels}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data}
+                    </tbody>
+                </table>
+                <Graph data={this.props.datagraph}/>
+            </div>
         );
 
         /*

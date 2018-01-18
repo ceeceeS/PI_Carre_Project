@@ -93,6 +93,8 @@ class RequestEditor extends Component {
     var cols = [];
     var rows = [];
     var result = [[]];
+    var dataset = [];
+
     var optionsCars = this.state.optionsCars;
     //console.log(optionsCars)
     this.state.options.map(function(title){
@@ -110,8 +112,7 @@ class RequestEditor extends Component {
     );
 
     var tbody = rows.map(function(row,i){
-      //console.log(row.row)
-      //if(row.id==i){
+        dataset.push(parseInt(row.cars.length*100));
         return (
           <tr>
             {cols.map((col,index)=> col =="cars"? /*row[col].length == 0? <td key={index}>test</td>:*/
@@ -120,11 +121,10 @@ class RequestEditor extends Component {
               <td key={index}>{row[col]}</td>)}
           </tr>
         );
-      //}
     })
-    console.log(tbody);
+    console.log(dataset);
 
-    return <RequestResult tbody={tbody} thead={thead}/>;
+    return <RequestResult tbody={tbody} thead={thead} datagraph={dataset}/>;
   }
 
 
@@ -266,10 +266,10 @@ class RequestEditor extends Component {
                     <label>Registration N° </label>
                     <input type="checkbox" name="cars" value="registrationNo" onChange={this.onChangeCar.bind(this)} />
                   </div>
-  {/* <div className = "editor__item">
-      <label>Owner</label>
-      <input type="checkbox" name="cars" value="owner" onChange={this.onChange.bind(this)} />
-    </div> */}
+                  {/* <div className = "editor__item">
+                      <label>Owner</label>
+                      <input type="checkbox" name="cars" value="owner" onChange={this.onChange.bind(this)} />
+                    </div> */}
                 </div>
               </form>
             </div>
@@ -280,7 +280,6 @@ class RequestEditor extends Component {
             {/*this.props.data.getAllUsers.map((users) => <li key={users}> 
             {this.state.options.map((i) => i == "cars"? users[i].map((j)=>j.model) :users[i])}</li>)*/}
             { this.displayData() }
-            <Graph/>
           </div>
         </div>
         </div>
