@@ -16,22 +16,25 @@ class RequestEditor extends Component {
     // initialize your options array on your state
     this.state = {
       options: [],
-      optionsCars : []
+      optionsCars : [],
+      showing : false
     }
   }
   
   onChange(e) {
     // current array of options
     const options = this.state.options
+
     const cars = this.state.cars
     let index;
     // check if the check box is checked or unchecked
-    if (e.target.checked) {
+   if (e.target.checked && e.target.value !="cars") {
     //if (e.target.checked && e.target.name == "cars") {
        // add the numerical value of the checkbox to options array
        //cars.push(e.target.value)
        //options[0].push(cars)
        //console.log(cars)
+     
        options.push(e.target.value)
        // userItem = (user,i)=> key={i}> for (option in options) {{user.option},}
     //}else if(e.target.checked && e.target.name != "cars"){
@@ -43,7 +46,8 @@ class RequestEditor extends Component {
     }
 
     // update the state with the new array of options
-    this.setState({ options: options })
+    this.setState({ options: options})
+   
     console.log(options);
   }
 
@@ -53,7 +57,7 @@ class RequestEditor extends Component {
     let index;
 
     // check if the check box is checked or unchecked
-    if (e.target.checked) {
+    if (e.target.checked ) {
        // add the numerical value of the checkbox to options array
        optionsCars.push(e.target.value)
        console.log(e.target.value)
@@ -65,8 +69,33 @@ class RequestEditor extends Component {
     }
 
     // update the state with the new array of optionsCars
-    this.setState({ optionsCars: optionsCars })
+    this.setState({ optionsCars: optionsCars})
+   
     console.log(this.state.optionsCars);
+  }
+
+
+  displayCarOption(e)
+  {
+    const options = this.state.options
+    const showing = this.state.showing
+    const optionsCars = this.state.optionsCars
+    let index
+    if (e.target.checked && e.target.value =="cars") {
+      // add the numerical value of the checkbox to options array
+      options.push(e.target.value)
+      console.log(e.target.value)
+      // userItem = (user,i)=> key={i}> for (option in options) {{user.option},}
+   } else {
+     // or remove the value from the unchecked checkbox from the array
+     index = options.indexOf(+e.target.value)
+     options.splice(index, 1)
+   }
+   
+    this.setState({showing : !showing, optionsCars :[]})
+
+    console.log(options);
+    
   }
 
   displayData(){
@@ -112,7 +141,7 @@ class RequestEditor extends Component {
     if (this.props.data.loading) {
             return <div>Loading</div>;
         }
-
+    const {showing} = this.state;
     return (
       <div className="row">
         <div className="col-xs-12 col-sm-4 col-md-4 col-lg-3">
@@ -139,26 +168,33 @@ class RequestEditor extends Component {
                     <label>birthday</label>
                     <input type="checkbox" value="birthday" onChange={this.onChange.bind(this)} />
                   </div>
-                  <div className = "editor__item">
-                    <label>cars</label>
-                    <input type="checkbox"  value="cars" onChange={this.onChange.bind(this)} />
-                  </div>
+                 
               </form>
+         {}
             </div>
             <div className = "editor">
               <form name ="myform">
-                <div className="form-group">
+              <div className="form-group">
                   <div className = "editor_title">
                     <h3> Cars </h3>
-                  </div>
-                  <div className = "editor__item">
+               </div>
+              <div className = "editor__item">
+                    <label>cars</label>
+                    <input type="checkbox"  value="cars" onChange={this.displayCarOption.bind(this) } />
+                    {this.state.showing?
+                [
+                <div className = "editor__item">
                     <label>Model</label>
                     <input type="checkbox" name="cars" value="model" onChange={this.onChangeCar.bind(this)} />
-                  </div>
-                  <div className = "editor__item">
+                </div>,
+                 <div className = "editor__item">
                     <label>Registration N° </label>
                     <input type="checkbox" name="cars" value="registrationNo" onChange={this.onChangeCar.bind(this)} />
-                  </div>
+                    <input type="checkbox" name="cars" value="registrationNo" onChange={this.onChangeCar.bind(this)} />
+                </div>  
+              ]:""}
+                  
+                  </div>  
                 </div>
               </form>
             </div>
@@ -169,7 +205,7 @@ class RequestEditor extends Component {
             { this.displayData() }
           </div>
         </div>
-        </div>
+      </div>
     )
   }
 }
