@@ -10,18 +10,6 @@ import Graph from '../js/graphd3'
 import * as d3 from 'd3';
 import '../styles/graph.css'
 
-// {this.props.data.getAllUsers.map((users) => <li key={users}> 
-//                 user.displayName </li>)}
-//             {console.log(this.state.options)}
-
-
-
-// {if({this.state.options} != "cars")
-//                 {
-//                   {this.state.options.map((i) => users[i])}</li>)}
-//                 }else
-//                 {
-
 class RequestEditor extends Component {
    constructor() {
     super()
@@ -83,13 +71,6 @@ class RequestEditor extends Component {
 
   displayData(){
     //display data in function of labels selected
-
-    /*return this.props.data.getAllUsers.map((users) => <table>
-      {this.state.options.map((label)=> label =="cars"? 
-        users[label].map((car_label)=> this.state.optionsCars.map((carItem) =>car_label[carItem])): 
-          <tbody><tr><td>{users[label]}</td></tr></tbody>)}
-    </table>)*/
-      
     var cols = [];
     var rows = [];
     var result = [[]];
@@ -114,7 +95,7 @@ class RequestEditor extends Component {
     var tbody = rows.map(function(row,i){
         dataset.push(parseInt(row.cars.length*100));
         return (
-          <tr>
+          <tr key={i}>
             {cols.map((col,index)=> col =="cars"? /*row[col].length == 0? <td key={index}>test</td>:*/
             row[col].map((car_label)=>
               optionsCars.map((carItem,k) => <td key={k}>{car_label[carItem]}</td>)):
@@ -127,79 +108,6 @@ class RequestEditor extends Component {
     return <RequestResult tbody={tbody} thead={thead} datagraph={dataset}/>;
   }
 
-
-    /*var cols = [];
-    var rows = [];
-    var result = [[]];
-
-    this.state.options.map(function(title){
-      cols.push(title);
-    })
-
-    this.props.data.getAllUsers.map(function(row){
-      rows.push(row);
-    })
-    
-    var thead = cols.map(function(col){
-      return <th key={col}>{col}</th>
-    });
-
-    var tbody = rows.map(function(row,i){
-      if(i<rows.length){
-      return cols.map(function (col) {
-        console.log(row[col]);
-          result.push(<td key={row[col]}>{row[col]}</td>);
-          return <tr key={row}>{result}</tr>;
-      });
-    }});
-    console.log(tbody);
-
-    return <RequestResult tbody={tbody} thead={thead}/>;*/
-
-    /*var tabledata = [];
-    var rows =[];
-    var result;
-    var i = 0;
-    var taille = this.props.data.getAllUsers.length;
-    var test = this.state.options;
-    //for(var i = 0; i < length*this.state.options.length; i++) {
-      this.props.data.getAllUsers.map(function(user){
-        rows.push({data:user});
-        test.map(function(label){
-          result = rows.filter(title => label == title);
-          //label == "cars"? user[label].map((j)=>j.model) :
-          //tabledata.push({info:user[label],element:label})
-          });
-      })
-    //}
-    console.log(rows);
-    console.log(result);
-    //console.log(this.state.options);
-    return <RequestResult key={i} data={rows} label={this.state.options} taille={taille}></RequestResult>
-  }*/
-
-
-  /*getLabel(){
-    //get and display labels selected : to improve in order to display an array
-    return this.state.options.map(
-      function (label){
-        return <div className="editor__label" key={label}>{label}</div>
-      }
-    )
-  }
-
-  getArrayOfData (){
-    // build array from data available for a label, ex.: var age = [18,56,13]
-    // It would be better to use a direct query from graphql
-    var array = new Array();
-    return this.props.data.getAllUsers.map(
-      function (user){
-        array.push(user.birthday)
-        return <Graph key={user} data={JSON.stringify(array)}/>
-      }
-    )
-  }*/
-  
   render() {
     if (this.props.data.loading) {
             return <div>Loading</div>;
@@ -236,21 +144,6 @@ class RequestEditor extends Component {
                     <input type="checkbox"  value="cars" onChange={this.onChange.bind(this)} />
                   </div>
               </form>
-          {/* <div class="col-xs-6 col-md-4">
-          <h3> Cars </h3>
-            <div className = "editor__item">
-                <label>Model</label>
-                <input type="checkbox" name="cars" value="model" onChange={this.onChange.bind(this)} />
-              </div>
-            <div className = "editor__item">
-                <label>Registration N° </label>
-                <input type="checkbox" name="cars" value="registrationNo" onChange={this.onChange.bind(this)} />
-              </div>
-            <div className = "editor__item">
-                <label>Owner</label>
-                <input type="checkbox" name="cars" value="owner" onChange={this.onChange.bind(this)} />
-              </div>
-            </div> */}
             </div>
             <div className = "editor">
               <form name ="myform">
@@ -266,10 +159,6 @@ class RequestEditor extends Component {
                     <label>Registration N° </label>
                     <input type="checkbox" name="cars" value="registrationNo" onChange={this.onChangeCar.bind(this)} />
                   </div>
-                  {/* <div className = "editor__item">
-                      <label>Owner</label>
-                      <input type="checkbox" name="cars" value="owner" onChange={this.onChange.bind(this)} />
-                    </div> */}
                 </div>
               </form>
             </div>
@@ -277,15 +166,12 @@ class RequestEditor extends Component {
 
         <div className="col-xs-12 col-sm-8 col-md-8 col-lg-9">
           <div className="result">
-            {/*this.props.data.getAllUsers.map((users) => <li key={users}> 
-            {this.state.options.map((i) => i == "cars"? users[i].map((j)=>j.model) :users[i])}</li>)*/}
             { this.displayData() }
           </div>
         </div>
         </div>
     )
   }
-
 }
 const Cquery = gql` query getAllUsers{
   getAllUsers {
@@ -299,10 +185,9 @@ const Cquery = gql` query getAllUsers{
       model
       registrationNo
     }
-   
-   
   }
 }
 `;
+
 export default graphql(Cquery)(RequestEditor);
 
