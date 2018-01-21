@@ -175,30 +175,28 @@ class RequestEditor extends Component {
             <div className = "editor">
               <form name ="myform">
               <div className="form-group">
-                  <div className = "editor_title">
-                    <h3> Cars </h3>
-               </div>
-              <div className = "editor__item">
+                <div className = "editor_title">
+                  <h3> Cars </h3>
+                </div>
+                <div className = "editor__item">
                     <label>cars</label>
                     <input type="checkbox"  value="cars" onChange={this.displayCarOption.bind(this) } />
                     {this.state.showing?
-                [
-                <div className = "editor__item">
-                    <label>Model</label>
-                    <input type="checkbox" name="cars" value="model" onChange={this.onChangeCar.bind(this)} />
-                </div>,
-                 <div className = "editor__item">
-                    <label>Registration N° </label>
-                    <input type="checkbox" name="cars" value="registrationNo" onChange={this.onChangeCar.bind(this)} />
-                    <input type="checkbox" name="cars" value="registrationNo" onChange={this.onChangeCar.bind(this)} />
+                    [
+                    <div className = "editor__item">
+                        <label>Model</label>
+                        <input type="checkbox" name="cars" value="model" onChange={this.onChangeCar.bind(this)} />
+                    </div>,
+                    <div className = "editor__item">
+                        <label>Registration N° </label>
+                        <input type="checkbox" name="cars" value="registrationNo" onChange={this.onChangeCar.bind(this)} />
+                    </div>  
+                    ]:""}
                 </div>  
-              ]:""}
-                  
-                  </div>  
-                </div>
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
+        </div>
 
         <div className="col-xs-12 col-sm-8 col-md-8 col-lg-9">
           <div className="result">
