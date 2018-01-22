@@ -165,7 +165,7 @@ class RequestEditor extends Component {
                     <input type="checkbox" value= "salary" onChange={this.onChange.bind(this)} />
                   </div>
                   <div className = "editor__item">
-                    <label>household</label>
+                    <label>Household</label>
                     <input type="checkbox" value= "household" onChange={this.onChange.bind(this)} />
                   </div>
                  
