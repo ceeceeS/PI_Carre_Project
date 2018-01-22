@@ -150,23 +150,23 @@ class RequestEditor extends Component {
                 <h3> Users</h3>
                   <div className = "editor__item">
                     <label>Full Name</label>
-                    <input type="checkbox"  value= "displayName" onChange={this.onChange.bind(this)} />
-                  </div>
-                  <div className = "editor__item">
-                    <label>First Name</label>
-                    <input type="checkbox" value= "firstName" onChange={this.onChange.bind(this)} />
-                  </div>
-                  <div className = "editor__item">
-                    <label>Last Name</label>
-                    <input type="checkbox" value= "lastName" onChange={this.onChange.bind(this)} />
+                    <input type="checkbox"  value= "name" onChange={this.onChange.bind(this)} />
                   </div>
                   <div className = "editor__item">
                     <label>Email</label>
                     <input type="checkbox" value="email" onChange={this.onChange.bind(this)} />
                   </div>
                   <div className = "editor__item">
-                    <label>birthday</label>
-                    <input type="checkbox" value="birthday" onChange={this.onChange.bind(this)} />
+                    <label>Age</label>
+                    <input type="checkbox" value="age" onChange={this.onChange.bind(this)} />
+                  </div>
+                  <div className = "editor__item">
+                    <label>Salary</label>
+                    <input type="checkbox" value= "salary" onChange={this.onChange.bind(this)} />
+                  </div>
+                  <div className = "editor__item">
+                    <label>household</label>
+                    <input type="checkbox" value= "household" onChange={this.onChange.bind(this)} />
                   </div>
                  
               </form>
@@ -190,7 +190,23 @@ class RequestEditor extends Component {
                     <div className = "editor__item">
                         <label>Registration N° </label>
                         <input type="checkbox" name="cars" value="registrationNo" onChange={this.onChangeCar.bind(this)} />
-                    </div>  
+                    </div>,
+                    <div className = "editor__item">
+                    <label>Color</label>
+                    <input type="checkbox" name="cars" value="carColor" onChange={this.onChangeCar.bind(this)} />
+                </div>,
+                <div className = "editor__item">
+                    <label>Insurance Price</label>
+                    <input type="checkbox" name="cars" value="insurancePrice" onChange={this.onChangeCar.bind(this)} />
+                </div>, 
+                <div className = "editor__item">
+                <label>Kilometer</label>
+                <input type="checkbox" name="cars" value="kilometer" onChange={this.onChangeCar.bind(this)} />
+            </div>,
+            <div className = "editor__item">
+                <label>Year of manufacture </label>
+                <input type="checkbox" name="cars" value="manufactureYear" onChange={this.onChangeCar.bind(this)} />
+            </div> 
                     ]:""}
                 </div>  
               </div>
@@ -209,15 +225,20 @@ class RequestEditor extends Component {
 }
 const Cquery = gql` query getAllUsers{
   getAllUsers {
-   displayName
-   firstName
-   lastName
-   email
-   birthday
+    name
+    email
+    age
+    salary
+    household 
     cars{
       _id
       model
       registrationNo
+      carColor 
+      insurancePrice 
+      kilometer 
+      manufactureYear
+      
     }
   }
 }
