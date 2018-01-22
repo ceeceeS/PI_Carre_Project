@@ -10,18 +10,6 @@ import Graph from '../js/graphd3'
 import * as d3 from 'd3';
 import '../styles/graph.css'
 
-// {this.props.data.getAllUsers.map((users) => <li key={users}> 
-//                 user.displayName </li>)}
-//             {console.log(this.state.options)}
-
-
-
-// {if({this.state.options} != "cars")
-//                 {
-//                   {this.state.options.map((i) => users[i])}</li>)}
-//                 }else
-//                 {
-
 class RequestEditor extends Component {
    constructor() {
     super()
@@ -112,13 +100,6 @@ class RequestEditor extends Component {
 
   displayData(){
     //display data in function of labels selected
-
-    /*return this.props.data.getAllUsers.map((users) => <table>
-      {this.state.options.map((label)=> label =="cars"? 
-        users[label].map((car_label)=> this.state.optionsCars.map((carItem) =>car_label[carItem])): 
-          <tbody><tr><td>{users[label]}</td></tr></tbody>)}
-    </table>)*/
-      
     var cols = [];
     var rows = [];
     var result = [[]];
@@ -143,7 +124,7 @@ class RequestEditor extends Component {
     var tbody = rows.map(function(row,i){
         dataset.push(parseInt(row.cars.length*100));
         return (
-          <tr>
+          <tr key={i}>
             {cols.map((col,index)=> col =="cars"? /*row[col].length == 0? <td key={index}>test</td>:*/
             row[col].map((car_label)=>
               optionsCars.map((carItem,k) => <td key={k}>{car_label[carItem]}</td>)):
@@ -156,9 +137,6 @@ class RequestEditor extends Component {
     return <RequestResult tbody={tbody} thead={thead} datagraph={dataset}/>;
   }
 
-
-   
-  
   render() {
     if (this.props.data.loading) {
             return <div>Loading</div>;
@@ -197,46 +175,37 @@ class RequestEditor extends Component {
             <div className = "editor">
               <form name ="myform">
               <div className="form-group">
-                  <div className = "editor_title">
-                    <h3> Cars </h3>
-               </div>
-              <div className = "editor__item">
+                <div className = "editor_title">
+                  <h3> Cars </h3>
+                </div>
+                <div className = "editor__item">
                     <label>cars</label>
                     <input type="checkbox"  value="cars" onChange={this.displayCarOption.bind(this) } />
                     {this.state.showing?
-                [
-                <div className = "editor__item">
-                    <label>Model</label>
-                    <input type="checkbox" name="cars" value="model" onChange={this.onChangeCar.bind(this)} />
-                </div>,
-                 <div className = "editor__item">
-                    <label>Registration N° </label>
-                    <input type="checkbox" name="cars" value="registrationNo" onChange={this.onChangeCar.bind(this) } />
+                    [
+                    <div className = "editor__item">
+                        <label>Model</label>
+                        <input type="checkbox" name="cars" value="model" onChange={this.onChangeCar.bind(this)} />
+                    </div>,
+                    <div className = "editor__item">
+                        <label>Registration N° </label>
+                        <input type="checkbox" name="cars" value="registrationNo" onChange={this.onChangeCar.bind(this)} />
+                    </div>  
+                    ]:""}
                 </div>  
-              ]:""}
-                  
-                  </div>  
-                
-  {/* <div className = "editor__item">
-      <label>Owner</label>
-      <input type="checkbox" name="cars" value="owner" onChange={this.onChange.bind(this)} />
-    </div> */}
-                </div>
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
+        </div>
 
         <div className="col-xs-12 col-sm-8 col-md-8 col-lg-9">
           <div className="result">
-            {/*this.props.data.getAllUsers.map((users) => <li key={users}> 
-            {this.state.options.map((i) => i == "cars"? users[i].map((j)=>j.model) :users[i])}</li>)*/}
             { this.displayData() }
           </div>
         </div>
-        </div>
+      </div>
     )
   }
-
 }
 const Cquery = gql` query getAllUsers{
   getAllUsers {
@@ -250,10 +219,9 @@ const Cquery = gql` query getAllUsers{
       model
       registrationNo
     }
-   
-   
   }
 }
 `;
+
 export default graphql(Cquery)(RequestEditor);
 
