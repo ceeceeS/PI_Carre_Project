@@ -14,9 +14,15 @@ const create = (car) => {
 const find = () =>{
 	return db.find();
 };
+
+const findselect = (model,registrationNo)=>{
+return db.find({model,registrationNo});
+}
+
 export const Car = {
   findById,
   findByOwner,
   create,
   find,
+  findselect,
 }

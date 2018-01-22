@@ -1,19 +1,18 @@
-
 type User {
   _id: String
-  displayName: String
+  name: String
   email: String
-  firstName: String
-  lastName: String
-  birthday: String
+  age: Int
+  salary : Float
+  household : Int
   cars: [ Car ]
 }
 
+
 input InputUser {
-  displayName: String!
+  name: String!
   email: String!
-  firstName: String!
-  lastName: String!
-  birthday: String!
-  
+  age: Int!
+  salary : Float!
+  household : Int!
 }
