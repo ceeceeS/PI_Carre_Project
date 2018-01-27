@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as d3 from 'd3';
 import '../styles/graph.css'
 
@@ -62,7 +63,7 @@ export default class Graph extends Component {
 
   exampleD3(data){
     d3.select(".graphs__bar")
-    .selectAll("div")
+      .selectAll("div")
       .data(data)
       .enter()
       .append("div")
@@ -115,6 +116,7 @@ export default class Graph extends Component {
       links,
     } = this.state;*/
     var data = this.props.data;
+    console.log(this.props.data)
     const dataset = [
                   [ 5,     20 ],
                   [ 480,   90 ],
