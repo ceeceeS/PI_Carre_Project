@@ -1,11 +1,11 @@
 type Car {
-  _id: String
-  model: String
-  registrationNo: String
-  carColor : String
-  insurancePrice : Float
-  kilometer :Float
-  manufactureYear: Int
+  _id: ID!
+  model: String!
+  registrationNo: String!
+  carColor : String!!
+  insurancePrice : Float!
+  kilometer :Float!
+  manufactureYear: Int!
   owner: User
 }
 
@@ -16,5 +16,5 @@ input InputCar {
   insurancePrice : Float!
   kilometer : Float!
   manufactureYear: Int!
-  owner: String!
+  owner: ID!
 }

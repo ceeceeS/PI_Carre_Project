@@ -14,6 +14,9 @@
 // export default userModel;
 import mongoose from 'mongoose';
 
+
+
+var ObjectId = mongoose.Schema.Types.ObjectId; 
 const CarSchema = new mongoose.Schema({
   model: String,
   registrationNo: String,
@@ -21,7 +24,7 @@ const CarSchema = new mongoose.Schema({
   insurancePrice : Number,
   kilometer : Number,
   manufactureYear: Number,
-  owner: { type: String, ref: 'User' },
+  owner: { type:ObjectId, ref: 'User' },
 });
 
 const UserSchema = new mongoose.Schema({
