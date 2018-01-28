@@ -1,3 +1,4 @@
+/* TOOLBAR */
 .toolbar{
     color: whitesmoke;
     background-color: #0066cc;
@@ -21,6 +22,8 @@
     margin: 0 10px;
     text-align: right;
 }
+
+/* EDITOR ON THE LEFT SIDE */
 .editor{
     padding:20px;
     margin: 15px;
@@ -49,30 +52,6 @@
     display: inline-block;
     vertical-align: middle;
 }
-
-/* .editor_title
-{
-    padding: 2px;
-    text-align: center;
-    text-decoration: none;
-    border-bottom:solid 1px rgb(8, 0, 0);
-}
-.editor_title h3
-{
-    color: rgb(75, 103, 226);
-} */
-/* 
-.editor_result 
-{
-    margin: 23px;
-    width: 400px;
-} */
-.result{
-    margin:10px;
-}
-.result  table, .result  th, .result  td {
-    border:1px solid black;
-}
 .editor__label:not(:first-child){
     border-left:none;
 }
@@ -81,3 +60,44 @@
     display: inline;
     padding: 5px;
 }
+
+
+/* RESULT DATA + GRAPH */
+.result{
+    margin:20px 20px 20px 0;
+}
+.result  table, .result  th, .result  td {
+    border:1px solid black;
+}
+.result  table{
+    width:100%;
+	margin:auto;
+}
+.result  th{
+    text-transform: uppercase;
+    padding:5px;
+}
+.result  td {
+    padding:5px;
+}
+.result__tablescroll {
+	position:relative;
+	max-width:100%;
+	margin:auto;
+	overflow:hidden;
+}
+.result__tablewrap{
+	overflow:auto;
+    width: 100%;
+}
+.result__menu{
+    margin-bottom: 20px;
+}
+a.result__menu__item{
+    text-decoration: none;
+    color: black;
+}
+a.result__menu__item:focus{
+    color: #1E90FF;
+}
+

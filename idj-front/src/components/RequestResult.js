@@ -1,6 +1,10 @@
 import React, {Component} from 'react'
-import { Link } from 'react-router-dom'
-import { withRouter } from 'react-router'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link
+} from 'react-router-dom';
 import '../styles/editor.css'
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag'
@@ -13,21 +17,36 @@ class RequestResult extends Component {
         
         var data = this.props.tbody;
         var labels = this.props.thead;
+
+        const RawData = () => (
+            <div className="result__tablescroll">
+                <div className="result__tablewrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                {labels}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        )
         
         return (
-            <div>
-                <table>
-                    <thead>
-                        <tr>
-                            {labels}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data}
-                    </tbody>
-                </table>
-                <Graph data={this.props.datagraph}/>
-            </div>
+            <Router>
+                <div>
+                    <div className="result__menu">
+                        <Link className="result__menu__item" to="/dashboard">Raw Data</Link>{' '}|{' '}
+                        <Link className="result__menu__item" to='/dashboard/graph'>Graph D3</Link>
+                    </div>
+
+                    <Route exact path="/dashboard" component={RawData}/>
+                    <Route exact path="/dashboard/graph" render={() => (<Graph data={this.props.datagraph}/>)}/>
+                </div>
+            </Router>
         );
     }
 }
