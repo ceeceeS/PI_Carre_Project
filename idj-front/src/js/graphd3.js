@@ -106,6 +106,77 @@ export default class Graph extends Component {
     .attr("fill", "red");
   }
 
+  graphe(jsonData){
+  // set the dimensions of the canvas
+  var margin = {top: 20, right: 20, bottom: 70, left: 40},
+      width = 600 - margin.left - margin.right,
+      height = 300 - margin.top - margin.bottom;
+
+  // set the ranges
+  var x = d3.scaleBand().rangeRound([0, width]).padding(0.05);
+  var y = d3.scaleLinear().range([height, 0]);
+
+  // define the axis
+  var xAxis = d3.axisBottom(x)
+  var yAxis = d3.axisLeft(y)
+      .ticks(10);
+
+  // add the SVG element
+  var svg = d3.select("body").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform", 
+            "translate(" + margin.left + "," + margin.top + ")");
+
+  // load the data
+  d3.json(jsonData, function(error, data) {
+      jsonData.forEach(function(d) {
+          d = JSON.stringify(d);
+          d = JSON.parse(d);
+          console.log(d);
+          d.name = d.name;
+          d.cars.length = d.cars.length;
+      });
+    
+    // scale the range of the data
+    x.domain(jsonData.map(function(d) { return d.name; }));
+    y.domain([0, d3.max(jsonData, function(d) { return d.cars.length; })]);
+
+    // add axis
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+      .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", "-.55em")
+        .attr("transform", "rotate(-90)" );
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+      .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 5)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Nb of cars");
+
+    // Add bar chart
+    svg.selectAll("bar")
+        .data(jsonData)
+      .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", function(d) { return x(d.name); })
+        .attr("width", x.bandwidth())
+        .attr("y", function(d) { return y(d.cars.length); })
+        .attr("height", function(d) { return height - y(d.cars.length); });
+
+  });
+}
+
   render() {
     /*const {
       width,
@@ -116,7 +187,9 @@ export default class Graph extends Component {
       links,
     } = this.state;*/
     var data = this.props.data;
-    console.log(this.props.data)
+    console.log(data);
+    //var dt = this.props.json;
+    //console.log(this.props.json)
     const dataset = [
                   [ 5,     20 ],
                   [ 480,   90 ],
@@ -132,7 +205,7 @@ export default class Graph extends Component {
     
     return (
       <div className="graphs">
-        <div className="graphs__bar">{this.exampleD3(data)}</div>
+        <svg className="bar">{this.graphe(data)}</svg>
         <svg className="graphs__scatterplot">{this.nbOfCarsbyAge(dataset)}</svg>
       </div>
     );
