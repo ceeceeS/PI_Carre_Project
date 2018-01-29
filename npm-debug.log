@@ -1,0 +1,34 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Users\\dufou\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'start' ]
+2 info using npm@4.1.1
+3 info using node@v9.0.0
+4 verbose run-script [ 'prestart', 'start', 'poststart' ]
+5 info lifecycle A5_pi_carre@1.0.0~prestart: A5_pi_carre@1.0.0
+6 silly lifecycle A5_pi_carre@1.0.0~prestart: no script for prestart, continuing
+7 info lifecycle A5_pi_carre@1.0.0~start: A5_pi_carre@1.0.0
+8 verbose lifecycle A5_pi_carre@1.0.0~start: unsafe-perm in lifecycle true
+9 verbose lifecycle A5_pi_carre@1.0.0~start: PATH: C:\Users\dufou\AppData\Roaming\npm\node_modules\npm\bin\node-gyp-bin;C:\Users\dufou\Documents\PROJET\PI_Carre_Project\node_modules\.bin;C:\oraclexe\app\oracle\product\11.2.0\server\bin;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\Program Files\Java\jdk1.8.0_101/bin;C:\Users\dufou\OneDrive\Documents\apache-maven-3.3.9/bin;C:\wamp64\bin\php\php7.0.10;C:\Program Files (x86)\Bitvise SSH Client;C:\ProgramData\ComposerSetup\bin;C:\wamp64\bin\php;C:\Program Files (x86)\Skype\Phone\;C:\Program Files (x86)\Windows Live\Shared;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Users\dufou\AppData\Local\Programs\Python\Python37\Scripts\;C:\Users\dufou\AppData\Local\Programs\Python\Python37\;C:\Users\dufou\AppData\Local\Microsoft\WindowsApps;C:\Users\dufou\AppData\Roaming\Composer\vendor\bin;C:\Users\dufou\.babun;C:\Users\dufou\AppData\Roaming\npm;C:\Users\dufou\AppData\Local\Yarn\bin;
+10 verbose lifecycle A5_pi_carre@1.0.0~start: CWD: C:\Users\dufou\Documents\PROJET\PI_Carre_Project
+11 silly lifecycle A5_pi_carre@1.0.0~start: Args: [ '/d /s /c', 'nodemon server.js --exec babel-node' ]
+12 verbose stack Error: kill ENOSYS
+12 verbose stack     at Object._errnoException (util.js:1031:13)
+12 verbose stack     at process.kill (internal/process.js:173:18)
+12 verbose stack     at process.listener (C:\Users\dufou\AppData\Roaming\npm\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:95:15)
+12 verbose stack     at emitNone (events.js:115:13)
+12 verbose stack     at process.emit (events.js:218:7)
+12 verbose stack     at processEmit (C:\Users\dufou\AppData\Roaming\npm\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:155:32)
+12 verbose stack     at Signal.wrap.onsignal (internal/process.js:198:44)
+13 verbose cwd C:\Users\dufou\Documents\PROJET\PI_Carre_Project
+14 error Windows_NT 10.0.16299
+15 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Users\\dufou\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "start"
+16 error node v9.0.0
+17 error npm  v4.1.1
+18 error code ENOSYS
+19 error errno ENOSYS
+20 error syscall kill
+21 error kill ENOSYS
+22 error If you need help, you may report this error at:
+22 error     <https://github.com/npm/npm/issues>
+23 verbose exit [ 1, true ]

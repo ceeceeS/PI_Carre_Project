@@ -117,6 +117,7 @@ class RequestEditor extends Component {
     var rows = [];
     var result = [[]];
     var dataset = [];
+    var json = [];
 
     var optionsCars = this.state.optionsCars;
     //console.log(optionsCars)
@@ -135,7 +136,8 @@ class RequestEditor extends Component {
     );
 
     var tbody = rows.map(function(row,i){
-        dataset.push(parseInt(row.cars.length*100));
+        dataset.push(row);
+        //json.push(JSON.stringify(row));
         return (
           <tr key={i}>
             {cols.map((col,index)=> col =="cars"? /*row[col].length == 0? <td key={index}>test</td>:*/
@@ -146,6 +148,7 @@ class RequestEditor extends Component {
         );
     })
     console.log(dataset);
+    //console.log(json);
 
     return <RequestResult tbody={tbody} thead={thead} datagraph={rows}/>;
   }

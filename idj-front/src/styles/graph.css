@@ -9,3 +9,22 @@
 .graphs{
   width: 100%;
 }
+
+.bar{
+    fill: steelblue;
+  }
+
+  .bar:hover{
+    fill: brown;
+  }
+
+	.axisBottom, .axisLeft {
+	  font: 10px sans-serif;
+	}
+
+	.axisBottom, .axisLeft path,
+	.axis, .axisLeft line {
+	  fill: none;
+	  stroke: #000;
+	  shape-rendering: crispEdges;
+	}
