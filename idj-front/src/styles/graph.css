@@ -11,20 +11,24 @@
 }
 
 .bar{
-    fill: steelblue;
-  }
+  fill: steelblue;
+}
+svg.bar{
+  width: 100%;
+  height: -webkit-fill-available;
+}
 
-  .bar:hover{
-    fill: brown;
-  }
+.bar:hover{
+  fill: brown;
+}
 
-	.axisBottom, .axisLeft {
-	  font: 10px sans-serif;
-	}
+.axisBottom, .axisLeft {
+  font: 10px sans-serif;
+}
 
-	.axisBottom, .axisLeft path,
-	.axis, .axisLeft line {
-	  fill: none;
-	  stroke: #000;
-	  shape-rendering: crispEdges;
-	}
+.axisBottom, .axisLeft path,
+.axis, .axisLeft line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}

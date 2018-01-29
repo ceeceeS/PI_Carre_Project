@@ -27,7 +27,7 @@ export default class Graph extends Component {
       var svg = d3.select(".graphs__scatterplot")
               //Make SVG container 100% width and height of parent container
               .attr("preserveAspectRatio", "xMinYMin meet")
-              .attr("viewBox", "0 0 1000 800");
+              .attr("viewBox", "0 0 1000 500");
       var circles = svg.selectAll("circle")
               .data(data)
               .enter()
@@ -109,7 +109,7 @@ export default class Graph extends Component {
       .ticks(10);
 
   // add the SVG element
-  var svg = d3.select("body").append("svg")
+  var svg = d3.select(".bar").append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -121,7 +121,7 @@ export default class Graph extends Component {
       jsonData.forEach(function(d) {
           d = JSON.stringify(d);
           d = JSON.parse(d);
-          console.log(d);
+          //console.log(d);
           d.name = d.name;
           d.cars.length = d.cars.length;
       });
@@ -152,7 +152,7 @@ export default class Graph extends Component {
         .text("Nb of cars");
 
     // Add bar chart
-    svg.selectAll("bar")
+    svg.selectAll(".bar")
         .data(jsonData)
       .enter().append("rect")
         .attr("class", "bar")
@@ -170,7 +170,6 @@ export default class Graph extends Component {
     datas.map(function(data,i){
       dataArray.push([data.salary, data.age, data.household, data.cars.length])
     })
-console.log(dataArray)
     // default data
     /*const dataset = [
     /*const {
@@ -203,7 +202,6 @@ console.log(dataArray)
         <div className="graphs__bar">{this.exampleD3(dataArray)}</div>
         <svg className="graphs__scatterplot">{this.nbOfCarsbyAge(dataArray)}</svg>
         <svg className="bar">{this.graphe(data)}</svg>
-        <svg className="graphs__scatterplot">{this.nbOfCarsbyAge(dataset)}</svg>
       </div>
     );
   }
