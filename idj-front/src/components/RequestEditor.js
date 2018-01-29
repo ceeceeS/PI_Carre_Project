@@ -21,7 +21,7 @@ class RequestEditor extends Component {
       showing : false
     }
   }
-  
+
   onChange(e) {
     // current array of options
     const options = this.state.options
@@ -74,8 +74,8 @@ class RequestEditor extends Component {
     // update the state with the new array of optionsCars
     this.setState({ optionsCars: optionsCars})
     this.setState({ selectCarcolor:e.target.value})
-
-    console.log("coleur "+this.state.selectCarcolor);
+    console.log(e.target.value);
+    console.log("couleur "+this.state.selectCarcolor);
   
     console.log(this.state.optionsCars);
   }
@@ -147,7 +147,7 @@ class RequestEditor extends Component {
     })
     console.log(dataset);
 
-    return <RequestResult tbody={tbody} thead={thead} datagraph={dataset}/>;
+    return <RequestResult tbody={tbody} thead={thead} datagraph={rows}/>;
   }
 
   render() {
@@ -155,8 +155,10 @@ class RequestEditor extends Component {
             return <div>Loading</div>;
         }
    // const selectCarcolor = this.props.selectedoptions
-    const {showing} = this.state;
+   const {showing} = this.state;
    const {selectCarcolor} = this.state;
+   console.log({selectCarcolor})
+
     return (
       <div className="row">
         <div className="col-xs-12 col-sm-4 col-md-4 col-lg-3">
@@ -185,7 +187,7 @@ class RequestEditor extends Component {
                   </div>
                  
               </form>
-         {}
+              {}
             </div>
             <div className = "editor">
               <form name ="myform">
@@ -207,29 +209,29 @@ class RequestEditor extends Component {
                         <input type="checkbox" name="cars" value="registrationNo" onChange={this.onChangeCar.bind(this)} />
                     </div>,
                     <div className = "editor__item">
-                    <label>Color</label>
-                    <select value={selectCarcolor.value} onChange={this.onChangeCar.bind(this)}>
-                      <option value="">select car color</option>
-                      <option value="Red">Red</option>
-                      <option value="Black">Black</option>
-                      <option value="Green">Green</option>
-                      <option value="Yellow">Yellow</option>
-                      <option value="Grey">Grey</option>
-                      <option value="Blue">Blue</option>
-                    </select>
-                </div>,
-                <div className = "editor__item">
-                    <label>Insurance Price</label>
-                    <input type="checkbox" name="cars" value="insurancePrice" onChange={this.onChangeCar.bind(this)} />
-                </div>, 
-                <div className = "editor__item">
-                <label>Kilometer</label>
-                <input type="checkbox" name="cars" value="kilometer" onChange={this.onChangeCar.bind(this)} />
-            </div>,
-            <div className = "editor__item">
-                <label>Year of manufacture </label>
-                <input type="checkbox" name="cars" value="manufactureYear" onChange={this.onChangeCar.bind(this)} />
-            </div> 
+                      <label>Color</label>
+                      <select value={selectCarcolor.value} onChange={this.onChangeCar.bind(this)}>
+                        <option value="">Select color</option>
+                        <option value="Red">Red</option>
+                        <option value="Black">Black</option>
+                        <option value="Green">Green</option>
+                        <option value="Yellow">Yellow</option>
+                        <option value="Grey">Grey</option>
+                        <option value="Blue">Blue</option>
+                      </select>
+                    </div>,
+                    <div className = "editor__item">
+                        <label>Insurance Price</label>
+                        <input type="checkbox" name="cars" value="insurancePrice" onChange={this.onChangeCar.bind(this)} />
+                    </div>, 
+                    <div className = "editor__item">
+                      <label>Kilometer</label>
+                      <input type="checkbox" name="cars" value="kilometer" onChange={this.onChangeCar.bind(this)} />
+                    </div>,
+                    <div className = "editor__item">
+                        <label>Year of manufacture </label>
+                        <input type="checkbox" name="cars" value="manufactureYear" onChange={this.onChangeCar.bind(this)} />
+                    </div> 
                     ]:""}
                 </div>  
               </div>
@@ -266,6 +268,16 @@ const Cquery = gql` query getAllUsers{
   }
 }
 `;
+
+/*export default graphql(Cquery, {
+    options: ownProps => {
+        return { variables: { age: '18' } }
+        //console.log(ownProps)
+    },
+    props: ({ data, ownProps }) => {
+        return { data, ...ownProps }
+    }
+})(RequestEditor)*/
 
 export default graphql(Cquery)(RequestEditor);
 

@@ -7,60 +7,6 @@ import '../styles/graph.css'
 
 export default class Graph extends Component {
     
-  /*static propTypes = {
-    height: PropTypes.number.isRequired,
-    width: PropTypes.number.isRequired,
-    nodes: PropTypes.array.isRequired, // eslint-disable-line
-    links: PropTypes.array.isRequired, // eslint-disable-line
-  };
-
-  constructor(props) {
-    super(props);
-    const {
-      width,
-      height,
-    } = props;
-
-    this.force = d3.layout.force()
-      .charge(-300)
-      .linkDistance(50)
-      .size([width, height]);
-  }
-
-  state = {
-    nodes: [],
-    links: [],
-  };
-
-  componentWillMount() {
-    this.force.on('tick', () => {
-      // after force calculation starts, call
-      // forceUpdate on the React component on each tick
-      this.forceUpdate();
-    });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const mutableNodes = nextProps.nodes.map(
-      ({ _id, key, size }) => ({ _id, key, size }),
-    );
-    const mutableLinks = nextProps.links.map(
-      ({ source, target, _id, key, size }) =>
-      ({ source, target, _id, key, size }),
-    );
-    this.setState({
-      nodes: mutableNodes,
-      links: mutableLinks,
-    });
-    this.force.nodes(
-      mutableNodes,
-    ).links(
-      mutableLinks,
-    );
-
-    this.force.start();
-    }*/
-
   exampleD3(data){
     d3.select(".graphs__bar")
       .selectAll("div")
@@ -68,56 +14,94 @@ export default class Graph extends Component {
       .enter()
       .append("div")
       .style("width", 0)
-      .transition().style("width", function(d) { return d + "px"; }).duration(1000)
-      .text(function(d) { return d; });
+      .transition().style("width", function(d) { return d[2]*100 + "px"; }).duration(1000)
+      .text(function(d) { return d[2]; });
   }
   
   nbOfCarsbyAge(data){
       //points
+      var scale = d3.scaleLinear()
+            .domain([2000, 100500.2])
+            .range([0, 800]);
+
       var svg = d3.select(".graphs__scatterplot")
-              /*.append("svg")*/
-              .attr("width", 1500)
-      svg.selectAll("circle")
+              //Make SVG container 100% width and height of parent container
+              .attr("preserveAspectRatio", "xMinYMin meet")
+              .attr("viewBox", "0 0 1000 800");
+      var circles = svg.selectAll("circle")
               .data(data)
               .enter()
               .append("circle")
-      .attr("cx", function(d) {return d[0];}).transition().duration(2000)
-      .attr("cy", function(d) {
-          return d[1];
-        })
-      .attr("r", 5);
+              .attr("cx", function(d) {return scale(d[0]);})
+              .attr("cy", 0)
+              .attr("r", function(d) {return d[0]/1000})
+              .attr("fill", "#1E90FF")
+              .on("mouseover", handleMouseOver)
+              .on("mouseout", handleMouseOut);
+
+      circles.transition()
+          .duration(2000)
+          .attr("cy", function(d) { return d[1]*5})
 
       //legend
       svg.selectAll("text")
           .data(data)
           .enter()
           .append("text")
-    .text(function(d) {
-          return d[0] + "," + d[1];
-    })
-    .attr("x", function(d) {
-          return d[0];
-    }).transition().duration(2000)
-    .attr("y", function(d) {
-          return d[1];
-    })
-    .attr("font-family", "sans-serif")
-    .attr("font-size", "11px")
-    .attr("fill", "red");
+          .text(function(d) {return d[0] + ", " + d[1];})
+          .attr("x", function(d) {return scale(d[0]);}).transition().duration(2000)
+          .attr("y", function(d) {return d[1]*5;})
+          .attr("font-family", "Montserrat")
+          .attr("font-size", "12px")
+          .attr("fill", "black");
+
+      // Create Event Handlers for mouse
+      function handleMouseOver(d, i) {  // Add interactivity
+            // Use D3 to select element, change color and size
+            d3.select(this)
+              .attr("fill", "#0066cc")
+              .attr("r", d[0]/800);
+
+            /*d3.select(".graphs__scatterplot")
+            .selectAll("text")
+              .data(data)
+              .enter()
+              .append("text")
+              .text(function(d) {return d[2]+ ", " + d[3]; })
+              .attr("font-family", "Montserrat")
+              .attr("font-size", "12px")
+              .attr("fill", "black");*/
+            // Specify where to put label of text
+            d3.select(this).selectAll("text")
+              .append("text")
+              .text(function(d) {
+                return d[2]+", "+d[3];  // Value of the text
+              })
+              .attr("id", i)
+              .attr("x", scale(d[0]))
+              .attr("y", d[1]*5);
+          }
+
+      function handleMouseOut(d, i) {
+            // Use D3 to select element, change color back to normal
+            d3.select(this)
+              .attr("fill", "#1E90FF")
+              .attr("r", d[0]/1000);
+
+            // Select text by id and then remove
+            //d3.select("#t" + d.x + "-" + d.y + "-" + i).remove();  // Remove text location
+          }
   }
 
   render() {
-    /*const {
-      width,
-      height,
-    } = this.props;
-    const {
-      nodes,
-      links,
-    } = this.state;*/
-    var data = this.props.data;
-    console.log(this.props.data)
-    const dataset = [
+    var datas = this.props.data;
+    var dataArray = [];
+    datas.map(function(data,i){
+      dataArray.push([data.salary, data.age, data.household, data.cars.length])
+    })
+console.log(dataArray)
+    // default data
+    /*const dataset = [
                   [ 5,     20 ],
                   [ 480,   90 ],
                   [ 250,   50 ],
@@ -128,12 +112,12 @@ export default class Graph extends Component {
                   [ 25,    67 ],
                   [ 85,    21 ],
                   [ 220,   88 ]
-              ];
+              ];*/
     
     return (
       <div className="graphs">
-        <div className="graphs__bar">{this.exampleD3(data)}</div>
-        <svg className="graphs__scatterplot">{this.nbOfCarsbyAge(dataset)}</svg>
+        <div className="graphs__bar">{this.exampleD3(dataArray)}</div>
+        <svg className="graphs__scatterplot">{this.nbOfCarsbyAge(dataArray)}</svg>
       </div>
     );
   }

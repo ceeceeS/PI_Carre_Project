@@ -52,6 +52,9 @@
     display: inline-block;
     vertical-align: middle;
 }
+.editor__item select{
+    width:113px;
+}
 .editor__label:not(:first-child){
     border-left:none;
 }
