@@ -21,7 +21,7 @@ class RequestEditor extends Component {
       showing : false
     }
   }
-  
+
   onChange(e) {
     // current array of options
     const options = this.state.options
@@ -73,10 +73,16 @@ class RequestEditor extends Component {
 
     // update the state with the new array of optionsCars
     this.setState({ optionsCars: optionsCars})
+<<<<<<< HEAD
     //this.setState({ selectCarcolor:e.target.value})
     
 
     //console.log("coleur "+this.state.selectCarcolor);
+=======
+    this.setState({ selectCarcolor:e.target.value})
+    console.log(e.target.value);
+    console.log("couleur "+this.state.selectCarcolor);
+>>>>>>> d0fd2ec67b7b3d3e90b0847e02616f156bb0c29f
   
     console.log(this.state.optionsCars);
   }
@@ -117,7 +123,8 @@ onChangeCarColor(e){
     var cols = [];
     var rows = [];
     var result = [[]];
-    var dataset = [];
+    //var dataset = [];
+    //var json = [];
 
     var optionsCars = this.state.optionsCars;
     //console.log(optionsCars)
@@ -136,7 +143,8 @@ onChangeCarColor(e){
     );
 
     var tbody = rows.map(function(row,i){
-        dataset.push(parseInt(row.cars.length*100));
+        //dataset.push(row);
+        //json.push(JSON.stringify(row));
         return (
           <tr key={i}>
             {cols.map((col,index)=> col =="cars"? /*row[col].length == 0? <td key={index}>test</td>:*/
@@ -146,9 +154,10 @@ onChangeCarColor(e){
           </tr>
         );
     })
-    console.log(dataset);
+    console.log(rows)
+    //console.log(json);
 
-    return <RequestResult tbody={tbody} thead={thead} datagraph={dataset}/>;
+    return <RequestResult tbody={tbody} thead={thead} datagraph={rows}/>;
   }
 
   render() {
@@ -156,8 +165,10 @@ onChangeCarColor(e){
             return <div>Loading</div>;
         }
    // const selectCarcolor = this.props.selectedoptions
-    const {showing} = this.state;
+   const {showing} = this.state;
    const {selectCarcolor} = this.state;
+   console.log({selectCarcolor})
+
     return (
       <div className="row">
         <div className="col-xs-12 col-sm-4 col-md-4 col-lg-3">
@@ -186,7 +197,7 @@ onChangeCarColor(e){
                   </div>
                  
               </form>
-         {}
+              {}
             </div>
             <div className = "editor">
               <form name ="myform">
@@ -277,5 +288,19 @@ const datafetch = graphql(Cquery,{
 })
 
 
+<<<<<<< HEAD
 export default (datafetch)(RequestEditor);
+=======
+/*export default graphql(Cquery, {
+    options: ownProps => {
+        return { variables: { age: '18' } }
+        //console.log(ownProps)
+    },
+    props: ({ data, ownProps }) => {
+        return { data, ...ownProps }
+    }
+})(RequestEditor)*/
+
+export default graphql(Cquery)(RequestEditor);
+>>>>>>> d0fd2ec67b7b3d3e90b0847e02616f156bb0c29f
 
