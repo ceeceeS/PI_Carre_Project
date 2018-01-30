@@ -164,6 +164,117 @@ export default class Graph extends Component {
   });
 }
 
+  //Insurance price en fonction du salaire
+  scatterplot(jsonData){
+  var jsonArray = [];
+
+    // Variables
+  var body = d3.select('body')
+  var margin = { top: 50, right: 50, bottom: 50, left: 50 }
+  var h = 500 - margin.top - margin.bottom
+  var w = 500 - margin.left - margin.right
+
+  // load the data
+  d3.json(jsonData, function( data) {
+      jsonData.forEach(function(d) {
+        d.cars.forEach(function(c) {
+          d = JSON.stringify(d);
+          d = JSON.parse(d);
+          c = JSON.stringify(c);
+          c = JSON.parse(c);
+          //console.log(d);
+          jsonArray.push({"salary": d.salary, "insurancePrice": c.insurancePrice});
+        })
+      });
+
+      jsonArray.forEach(function(d) {
+        d.salary = d.salary;
+        d.insurancePrice = d.insurancePrice;
+      });
+
+  // Scales
+  var colorScale = d3.scaleOrdinal(d3.schemeCategory20)
+  var xScale = d3.scaleLinear()
+    .domain([
+      d3.min([0,d3.min(jsonArray,function (d) { return d.salary })]),
+      d3.max([0,d3.max(jsonArray,function (d) { return d.salary })])
+      ])
+    .range([0,w])
+  var yScale = d3.scaleLinear()
+    .domain([
+      d3.min([0,d3.min(jsonArray,function (d) { return d.insurancePrice })]),
+      d3.max([0,d3.max(jsonArray,function (d) { return d.insurancePrice })])
+      ])
+    .range([h,0])
+  // SVG
+  var svg = body.append('svg')
+      .attr('height',h + margin.top + margin.bottom)
+      .attr('width',w + margin.left + margin.right)
+    .append('g')
+      .attr('transform','translate(' + margin.left + ',' + margin.top + ')')
+  // X-axis
+  var xAxis = d3.axisBottom(xScale)
+    .ticks(5)
+  // Y-axis
+  var yAxis = d3.axisLeft(yScale)
+    .ticks(5)
+  // Circles
+  var circles = svg.selectAll('circle')
+      .data(jsonArray)
+      .enter()
+    .append('circle')
+      .attr('cx',function (d) { return xScale(d.salary) })
+      .attr('cy',function (d) { return yScale(d.insurancePrice) })
+      .attr('r','10')
+      .attr('stroke','black')
+      .attr('stroke-width',1)
+      .attr('fill',function (d,i) { return colorScale(i) })
+      .on('mouseover', function () {
+        d3.select(this)
+          .transition()
+          .duration(500)
+          .attr('r',20)
+          .attr('stroke-width',3)
+      })
+      .on('mouseout', function () {
+        d3.select(this)
+          .transition()
+          .duration(500)
+          .attr('r',10)
+          .attr('stroke-width',1)
+      })
+    .append('title') // Tooltip
+      .text(function (d) { return '\nInsurance Price: ' + d.insurancePrice +
+                           '\nOwner salary: ' + d.salary })
+  // X-axis
+  svg.append('g')
+      .attr('class','axis')
+      .attr('transform', 'translate(0,' + h + ')')
+      .call(xAxis)
+    .append('text') // X-axis Label
+      .attr('class','label')
+      .attr('y',-10)
+      .attr('x',w)
+      .attr('dy','.71em')
+      .style('text-anchor','end')
+      .text('Salary')
+  // Y-axis
+  svg.append('g')
+      .attr('class', 'axis')
+      .call(yAxis)
+    .append('text') // y-axis Label
+      .attr('class','label')
+      .attr('transform','rotate(-90)')
+      .attr('x',0)
+      .attr('y',5)
+      .attr('dy','.71em')
+      .style('text-anchor','end')
+      .text('Insurance Price')
+})
+
+}
+
+
   render() {
     var datas = this.props.data;
     var dataArray = [];
@@ -202,6 +313,7 @@ export default class Graph extends Component {
         <div className="graphs__bar">{this.exampleD3(dataArray)}</div>
         <svg className="graphs__scatterplot">{this.nbOfCarsbyAge(dataArray)}</svg>
         <svg className="bar">{this.graphe(data)}</svg>
+        <svg className="scatterplot">{this.scatterplot(data)}</svg>
       </div>
     );
   }
