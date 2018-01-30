@@ -73,16 +73,10 @@ class RequestEditor extends Component {
 
     // update the state with the new array of optionsCars
     this.setState({ optionsCars: optionsCars})
-<<<<<<< HEAD
     //this.setState({ selectCarcolor:e.target.value})
     
 
     //console.log("coleur "+this.state.selectCarcolor);
-=======
-    this.setState({ selectCarcolor:e.target.value})
-    console.log(e.target.value);
-    console.log("couleur "+this.state.selectCarcolor);
->>>>>>> d0fd2ec67b7b3d3e90b0847e02616f156bb0c29f
   
     console.log(this.state.optionsCars);
   }
@@ -288,19 +282,5 @@ const datafetch = graphql(Cquery,{
 })
 
 
-<<<<<<< HEAD
 export default (datafetch)(RequestEditor);
-=======
-/*export default graphql(Cquery, {
-    options: ownProps => {
-        return { variables: { age: '18' } }
-        //console.log(ownProps)
-    },
-    props: ({ data, ownProps }) => {
-        return { data, ...ownProps }
-    }
-})(RequestEditor)*/
-
-export default graphql(Cquery)(RequestEditor);
->>>>>>> d0fd2ec67b7b3d3e90b0847e02616f156bb0c29f
 
