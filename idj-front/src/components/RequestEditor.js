@@ -17,7 +17,7 @@ class RequestEditor extends Component {
     this.state = {
       options: [],
       optionsCars : [],
-      selectCarcolor : "",
+      selectCarcolor:'',
       showing : false
     }
   }
@@ -76,16 +76,20 @@ class RequestEditor extends Component {
     console.log(optionsCars)
     console.log(e.target.value);
     console.log("couleur "+ this.state.selectCarcolor);
+    //this.setState({ selectCarcolor:e.target.value})
+    
+
+    //console.log("coleur "+this.state.selectCarcolor);
   
     console.log(this.state.optionsCars);
   }
 
-// onChangeCarColor(e){
-//   const selectCarcolor = this.state.selectCarcolor
-//   this.setState({ selectCarcolor:e.target.value})
+onChangeCarColor(e){
+  //const selectCarcolor = this.state.selectCarcolor
+  this.setState({ selectCarcolor:e.target.value})
 
-//     console.log("color"+this.state.selectCarcolor);
-// }
+    console.log("color "+this.state.selectCarcolor);
+}
 
   displayCarOption(e)
   {
@@ -214,29 +218,29 @@ class RequestEditor extends Component {
                         <input type="checkbox" name="cars" value="registrationNo" onChange={this.onChangeCar.bind(this)} />
                     </div>,
                     <div className = "editor__item">
-                      <label>Color</label>
-                      <select value={selectCarcolor.value} onChange={this.onChangeCar.bind(this)}>
-                        <option value="">Select color</option>
-                        <option value="Red">Red</option>
-                        <option value="Black">Black</option>
-                        <option value="Green">Green</option>
-                        <option value="Yellow">Yellow</option>
-                        <option value="Grey">Grey</option>
-                        <option value="Blue">Blue</option>
-                      </select>
-                    </div>,
-                    <div className = "editor__item">
-                        <label>Insurance Price</label>
-                        <input type="checkbox" name="cars" value="insurancePrice" onChange={this.onChangeCar.bind(this)} />
-                    </div>, 
-                    <div className = "editor__item">
-                      <label>Kilometer</label>
-                      <input type="checkbox" name="cars" value="kilometer" onChange={this.onChangeCar.bind(this)} />
-                    </div>,
-                    <div className = "editor__item">
-                        <label>Year of manufacture </label>
-                        <input type="checkbox" name="cars" value="manufactureYear" onChange={this.onChangeCar.bind(this)} />
-                    </div> 
+                    <label>Color</label>
+                    <select value={this.state.selectCarcolor} onChange={this.onChangeCarColor.bind(this)}>
+                      <option value="select car color">select car color</option>
+                      <option value="Red">Red</option>
+                      <option value="Black">Black</option>
+                      <option value="Green">Green</option>
+                      <option value="Yellow">Yellow</option>
+                      <option value="Grey">Grey</option>
+                      <option value="Blue">Blue</option>
+                    </select>
+                </div>,
+                <div className = "editor__item">
+                    <label>Insurance Price</label>
+                    <input type="checkbox" name="cars" value="insurancePrice" onChange={this.onChangeCar.bind(this)} />
+                </div>, 
+                <div className = "editor__item">
+                <label>Kilometer</label>
+                <input type="checkbox" name="cars" value="kilometer" onChange={this.onChangeCar.bind(this)} />
+            </div>,
+            <div className = "editor__item">
+                <label>Year of manufacture </label>
+                <input type="checkbox" name="cars" value="manufactureYear" onChange={this.onChangeCar.bind(this)} />
+            </div> 
                     ]:""}
                 </div>  
               </div>
@@ -253,8 +257,8 @@ class RequestEditor extends Component {
     )
   }
 }
-const Cquery = gql` query getAllUsers{
-  getAllUsers {
+const Cquery =  gql` query getAllUsers($color: String!){
+    getAllUsers(color: $color) {
     name
     email
     age
@@ -272,17 +276,16 @@ const Cquery = gql` query getAllUsers{
     }
   }
 }
-`;
+`
+;
+const datafetch = graphql(Cquery,{
+  // The variable $keyword for the query is computed from the
+  // React props passed to this container.
+  options: props=> ({
+    variables: { color: "Grey"},
+  })
+})
 
-/*export default graphql(Cquery, {
-    options: ownProps => {
-        return { variables: { age: '18' } }
-        //console.log(ownProps)
-    },
-    props: ({ data, ownProps }) => {
-        return { data, ...ownProps }
-    }
-})(RequestEditor)*/
 
-export default graphql(Cquery)(RequestEditor);
+export default (datafetch)(RequestEditor);
 

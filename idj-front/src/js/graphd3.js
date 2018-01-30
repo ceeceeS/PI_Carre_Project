@@ -360,7 +360,7 @@ export default class Graph extends Component {
 
 
   //Visualisation when email or/and name checked
-  
+
 
 
   render() {
@@ -370,7 +370,7 @@ export default class Graph extends Component {
       dataArray.push([data.salary, data.age, data.household, data.cars.length])
     })
     var data = this.props.data;
-    console.log(data);
+    //console.log(data);
     //var dt = this.props.json;
     //console.log(this.props.json)
     const dataset = [

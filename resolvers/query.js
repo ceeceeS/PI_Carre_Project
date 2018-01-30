@@ -6,16 +6,21 @@ export const Query = {
   testString: () => {
       return 'new string!!!';
   },
-  getAllUsers: () => {
+  getAllCarsByUser: () => {
       return User.find();
   },
   getUser: (_, { id }) => {
       return User.findById(id);
   },
-//   getAllCars: () =>{
-//       return Car.find();
-//   },
-  getAllCars: (_,{model,registrationNo}) =>{
+  getAllCars: () =>{
+      return Car.find();
+  },
+  getAllUsers:(_, {color})=>
+  {
+      return User.SelectCarOpt(color);
+  },
+  
+  getModelCar: (_,{model,registrationNo}) =>{
     return Car.findselect(model,registrationNo);
 },
 
