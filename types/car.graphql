@@ -2,7 +2,7 @@ type Car {
   _id: ID!
   model: String!
   registrationNo: String!
-  carColor : String!!
+  carColor : String!
   insurancePrice : Float!
   kilometer :Float!
   manufactureYear: Int!

@@ -1,6 +1,6 @@
 import { Query } from './query';
 import { User } from './user';
-import { Car } from './Car';
+import { Car } from './car';
 import { Mutation } from './mutation';
 
 const resolvers = {

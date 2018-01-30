@@ -12,10 +12,14 @@ export const Query = {
   getUser: (_, { id }) => {
       return User.findById(id);
   },
-//   getAllCars: () =>{
-//       return Car.find();
-//   },
-  getAllCars: (_,{model,registrationNo}) =>{
+  getAllCars: () =>{
+      return Car.find();
+  },
+  getUsersCar:(_, {color})=>
+  {
+      return User.SelectCarOpt(color);
+  },
+ getAllCarsByUser: (_,{model,registrationNo}) =>{
     return Car.findselect(model,registrationNo);
 },
 

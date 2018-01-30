@@ -1,6 +1,9 @@
 type Query {
   getUser(id: ID!): User
   getAllUsers: [User]
-  getAllCars(model:String!, registrationNo:String!) : [Car]
+  getUsersCar(color:String!): [User]
+  getAllCars: [Car]
+  getAllCarsByUser(model:String!, registrationNo:String!) : [Car]
   testString: String
 }
+

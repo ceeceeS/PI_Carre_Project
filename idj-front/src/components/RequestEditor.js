@@ -17,7 +17,7 @@ class RequestEditor extends Component {
     this.state = {
       options: [],
       optionsCars : [],
-      selectCarcolor : "",
+      selectCarcolor:'',
       showing : false
     }
   }
@@ -73,19 +73,20 @@ class RequestEditor extends Component {
 
     // update the state with the new array of optionsCars
     this.setState({ optionsCars: optionsCars})
-    this.setState({ selectCarcolor:e.target.value})
+    //this.setState({ selectCarcolor:e.target.value})
+    
 
-    console.log("coleur "+this.state.selectCarcolor);
+    //console.log("coleur "+this.state.selectCarcolor);
   
     console.log(this.state.optionsCars);
   }
 
-// onChangeCarColor(e){
-//   const selectCarcolor = this.state.selectCarcolor
-//   this.setState({ selectCarcolor:e.target.value})
+onChangeCarColor(e){
+  //const selectCarcolor = this.state.selectCarcolor
+  this.setState({ selectCarcolor:e.target.value})
 
-//     console.log("color"+this.state.selectCarcolor);
-// }
+    console.log("color "+this.state.selectCarcolor);
+}
 
   displayCarOption(e)
   {
@@ -124,7 +125,7 @@ class RequestEditor extends Component {
       cols.push(title);
     })
 
-    this.props.data.getAllUsers.map(function(row){
+    this.props.data.getUsersCar.map(function(row){
       rows.push(row);
     })
     console.log(rows)
@@ -208,8 +209,8 @@ class RequestEditor extends Component {
                     </div>,
                     <div className = "editor__item">
                     <label>Color</label>
-                    <select value={selectCarcolor.value} onChange={this.onChangeCar.bind(this)}>
-                      <option value="">select car color</option>
+                    <select value={this.state.selectCarcolor} onChange={this.onChangeCarColor.bind(this)}>
+                      <option value="select car color">select car color</option>
                       <option value="Red">Red</option>
                       <option value="Black">Black</option>
                       <option value="Green">Green</option>
@@ -246,8 +247,8 @@ class RequestEditor extends Component {
     )
   }
 }
-const Cquery = gql` query getAllUsers{
-  getAllUsers {
+const Cquery =  gql` query  getUsersCar($color: String!){
+  getUsersCar(color: $color) {
     name
     email
     age
@@ -265,7 +266,16 @@ const Cquery = gql` query getAllUsers{
     }
   }
 }
-`;
+`
+;
+const datafetch = graphql(Cquery,{
+  // The variable $keyword for the query is computed from the
+  // React props passed to this container.
+  options: props=> ({
+    variables: { color: "this.props.data.selectCarcolor"},
+  })
+})
 
-export default graphql(Cquery)(RequestEditor);
+
+export default (datafetch)(RequestEditor);
 
