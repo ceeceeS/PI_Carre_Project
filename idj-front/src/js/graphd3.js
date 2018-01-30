@@ -121,7 +121,7 @@ export default class Graph extends Component {
       jsonData.forEach(function(d) {
           d = JSON.stringify(d);
           d = JSON.parse(d);
-          //console.log(d);
+          console.log(d);
           d.name = d.name;
           d.cars.length = d.cars.length;
       });
@@ -161,8 +161,101 @@ export default class Graph extends Component {
         .attr("y", function(d) { return y(d.cars.length); })
         .attr("height", function(d) { return height - y(d.cars.length); });
 
-  });
-}
+    });
+  }
+
+  //diagram: Insurance Price / User's age
+  createDiagram(data){
+    //var margin = {top: 20, right: 20, bottom: 70, left: 40},
+    var width = 400 //- margin.left - margin.right,
+    var height = 430 //- margin.top - margin.bottom;
+
+    // set the ranges
+    var x = d3.scaleBand().rangeRound([0, width]).padding(0.05);
+    var y = d3.scaleLinear().range([height, 0]);
+
+    // add the SVG element
+    var svg = d3.select(".diagram")
+        .attr("width", width+ "px")
+        .attr("height", height+ "px")
+        //.append("g")
+        //.attr("transform","translate(" + margin.left + "," + margin.top + ")");
+
+    // load the data
+    d3.json(data, function(error, dt) {
+      data.forEach(function(d) {
+         d = JSON.stringify(d);
+         d = JSON.parse(d);
+         console.log(d.cars[0].insurancePrice);
+         d.age = d.age;
+         d.cars[0].insurancePrice = d.cars[0].insurancePrice;
+        });
+      
+          // scale the range of the data
+          //x.domain(data.map(function(d) { return d.age; }));
+          //y.domain([0, d3.max(data, function(d) { return d.cars[0].insurancePrices; })]);
+
+          // add axis
+          svg.append("g").attr("class", "axes")
+          for(var i = 40 ; i<40+20*8;i=i+20){
+            d3.select(".axes")
+              .append("circle")
+              .attr("cx", 200)
+              .attr("cy", 200)
+              .attr("r", i)
+          };
+
+          svg.append("g").attr("class", "tickmarks")
+              .append("text")
+              .attr("dy", -2+"px")
+              .attr("transform", "translate(200,117.33333333333333)")
+              .text("900");
+          d3.select(".tickmarks")
+              .append("text")
+              .attr("dy", -2+"px")
+              .attr("transform", "translate(200,78.666666666666)")
+              .text("1300");
+
+          svg.append("g").attr("class", "labels")
+          for(var i = 6 ; i<360;i=i+60){
+            d3.select(".labels")
+              .append("text")
+              .attr("dy", -4+"px")
+              .attr("transform", "translate(200,20) rotate("+(i-6)+",0,180)")
+              .text(i/3);
+          };
+          svg.append("g").attr("class", "arcs")
+          for(var i = 40 ; i<40+20*8;i=i+20){
+            d3.select(".arcs")
+              .append("path")
+              .attr("d", "M 10 42 C 8 42 16 2 18 5 C 52 10 56 12 58 18 C 60 40 50 42 38 40Z")
+              .attr("transform", "translate(200,200)")
+              .attr("style","fill:blue");
+          };
+
+/*M44.67234252422411,-31.279910984947897A54.5348605740206,54.5348605740206 0 0,1 49.42536880319286,
+-23.047427980063986L30.814464759246096,-14.369020899183779A34,34 0 0,0 27.85116950582572,-19.501598835935567Z*/
+
+          /*svg.append("g")
+              .attr("class", "y axis")
+              .append("text")
+              .attr("transform", "rotate(-90)")
+              .attr("y", 5)
+              .attr("dy", ".71em")
+              .style("text-anchor", "end")
+              .text("Nb of cars");
+
+          // Add bar chart
+          svg.selectAll(".bar")
+              .data(data)
+              .enter().append("rect")
+              .attr("class", "bar")
+              .attr("x", function(d) { return x(d.name); })
+              .attr("width", x.bandwidth())
+              .attr("y", function(d) { return y(d.cars.length); })
+              .attr("height", function(d) { return height - y(d.cars.length); });*/
+        });
+  }
 
   render() {
     var datas = this.props.data;
@@ -170,16 +263,6 @@ export default class Graph extends Component {
     datas.map(function(data,i){
       dataArray.push([data.salary, data.age, data.household, data.cars.length])
     })
-    // default data
-    /*const dataset = [
-    /*const {
-      width,
-      height,
-    } = this.props;
-    const {
-      nodes,
-      links,
-    } = this.state;*/
     var data = this.props.data;
     console.log(data);
     //var dt = this.props.json;
@@ -196,12 +279,15 @@ export default class Graph extends Component {
                   [ 85,    21 ],
                   [ 220,   88 ]
               ];
+                   
+
     
     return (
       <div className="graphs">
         <div className="graphs__bar">{this.exampleD3(dataArray)}</div>
         <svg className="graphs__scatterplot">{this.nbOfCarsbyAge(dataArray)}</svg>
         <svg className="bar">{this.graphe(data)}</svg>
+        <svg className="diagram">{this.createDiagram(data)}</svg>
       </div>
     );
   }

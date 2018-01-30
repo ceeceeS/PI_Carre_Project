@@ -55,7 +55,6 @@ class RequestEditor extends Component {
   onChangeCar(e) {
     // current array of options
     const optionsCars = this.state.optionsCars
-    const selectCarcolor = this.state.selectCarcolor
     
     let index;
 
@@ -73,9 +72,10 @@ class RequestEditor extends Component {
 
     // update the state with the new array of optionsCars
     this.setState({ optionsCars: optionsCars})
-    this.setState({ selectCarcolor:e.target.value})
+    this.setState({ selectCarcolor: e.target.value})
+    console.log(optionsCars)
     console.log(e.target.value);
-    console.log("couleur "+this.state.selectCarcolor);
+    console.log("couleur "+ this.state.selectCarcolor);
   
     console.log(this.state.optionsCars);
   }
@@ -124,6 +124,7 @@ class RequestEditor extends Component {
     this.state.options.map(function(title){
       cols.push(title);
     })
+    console.log(cols)
 
     this.props.data.getAllUsers.map(function(row){
       rows.push(row);
@@ -134,6 +135,7 @@ class RequestEditor extends Component {
         optionsCars.map((carItem,j) => <th key={j}>Cars.{carItem}</th>): 
         <th key={col}>{col}</th>
     );
+    console.log(this.props)
 
     var tbody = rows.map(function(row,i){
         //dataset.push(row);
