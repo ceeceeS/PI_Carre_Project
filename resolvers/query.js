@@ -6,7 +6,7 @@ export const Query = {
   testString: () => {
       return 'new string!!!';
   },
-  getAllUsers: () => {
+  getAllCarsByUser: () => {
       return User.find();
   },
   getUser: (_, { id }) => {
@@ -15,11 +15,12 @@ export const Query = {
   getAllCars: () =>{
       return Car.find();
   },
-  getUsersCar:(_, {color})=>
+  getAllUsers:(_, {color})=>
   {
       return User.SelectCarOpt(color);
   },
- getAllCarsByUser: (_,{model,registrationNo}) =>{
+  
+  getModelCar: (_,{model,registrationNo}) =>{
     return Car.findselect(model,registrationNo);
 },
 

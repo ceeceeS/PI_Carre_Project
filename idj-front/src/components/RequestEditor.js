@@ -126,7 +126,7 @@ onChangeCarColor(e){
       cols.push(title);
     })
 
-    this.props.data.getUsersCar.map(function(row){
+    this.props.data.getAllUsers.map(function(row){
       rows.push(row);
     })
     console.log(rows)
@@ -252,8 +252,8 @@ onChangeCarColor(e){
     )
   }
 }
-const Cquery =  gql` query  getUsersCar($color: String!){
-  getUsersCar(color: $color) {
+const Cquery =  gql` query getAllUsers($color: String!){
+    getAllUsers(color: $color) {
     name
     email
     age
@@ -277,7 +277,7 @@ const datafetch = graphql(Cquery,{
   // The variable $keyword for the query is computed from the
   // React props passed to this container.
   options: props=> ({
-    variables: { color: "this.props.data.selectCarcolor"},
+    variables: { color: "Grey"},
   })
 })
 
