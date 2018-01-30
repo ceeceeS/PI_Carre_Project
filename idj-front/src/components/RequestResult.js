@@ -44,7 +44,7 @@ class RequestResult extends Component {
                     </div>
 
                     <Route exact path="/dashboard" component={RawData}/>
-                    <Route exact path="/dashboard/graph" render={() => (<Graph data={this.props.datagraph}/>)}/>
+                    <Route exact path="/dashboard/graph" render={() => (<Graph data={this.props.datagraph} itemsChecked={this.props.itemsChecked}/>)}/>
                 </div>
             </Router>
         );

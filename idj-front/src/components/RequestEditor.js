@@ -152,7 +152,7 @@ class RequestEditor extends Component {
     console.log(rows)
     //console.log(json);
 
-    return <RequestResult tbody={tbody} thead={thead} datagraph={rows}/>;
+    return <RequestResult tbody={tbody} thead={thead} datagraph={rows} itemsChecked = {cols}/>;
   }
 
   render() {
