@@ -59,4 +59,11 @@ svg.scatterplot{
     width: 100%;
     height: 500px;
 }
+
+svg .caption{
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+}
     

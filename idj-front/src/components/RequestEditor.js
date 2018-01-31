@@ -160,6 +160,7 @@ onChangeCarColor(e){
   }
 
   render() {
+    console.log(this)
     if (this.props.data.loading) {
             return <div>Loading</div>;
         }
