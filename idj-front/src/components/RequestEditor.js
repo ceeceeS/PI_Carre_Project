@@ -68,10 +68,10 @@ class RequestEditor extends Component {
 
     // update the state with the new array of optionsCars
     this.setState({ optionsCars: optionsCars})
-    this.setState({ selectCarcolor: e.target.value})
-    console.log(optionsCars)
-    console.log(e.target.value);
-    console.log("couleur "+ this.state.selectCarcolor);
+   
+    // console.log(optionsCars)
+    // console.log(e.target.value);
+   // console.log("couleur "+ this.state.selectCarcolor);
     //this.setState({ selectCarcolor:e.target.value})
     //console.log("coleur "+this.state.selectCarcolor);
   
@@ -80,10 +80,18 @@ class RequestEditor extends Component {
 
 onChangeCarColor(e){
   const ShowingCar = this.state.ShowingCar
-  //if(e.target.name == colors)
-  //const selectCarcolor = this.state.selectCarcolor
-  this.setState({ selectCarcolor:e.target.value, ShowingCar:!ShowingCar})
+  const optionsCars = this.state.optionsCars
+  let index;
   
+
+  index = optionsCars.indexOf("carColor")
+  optionsCars.splice(index, 1)
+  this.setState({ selectCarcolor:e.target.value})
+  optionsCars.push("carColor");
+  
+  this.setState({ optionsCars:optionsCars})
+  console.log(optionsCars)
+ // optionsCars.splice(index, 1)
 
     console.log("color "+this.state.selectCarcolor);
 }
@@ -114,18 +122,17 @@ onChangeCarColor(e){
 
   render() {
    
-    console.log("jdjdj"+this);
+   // console.log("jdjdj"+this);
    // const selectCarcolor = this.props.selectedoptions
    const {showing} = this.state;
    const {ShowingCar} = this.state;
    const {selectCarcolor} = this.state;
-  console.log("ehehhe "+ this.state.selectCarcolor);
+  //console.log("ehehhe "+ this.state.selectCarcolor);
     return (
+
       <div className="row">
         <div className="col-xs-12 col-sm-4 col-md-4 col-lg-3">
-          <div className = "editor">
-
-          <div className = "editor">
+        <div className = "editor">
               <form name ="myform">
               <div className="form-group">
                 <div className = "editor_title">
@@ -137,18 +144,17 @@ onChangeCarColor(e){
                     {this.state.showing?
                     [
                       <div className = "editor__item">
-                    <label>Color</label>
-                    <select name="cars" value={this.state.selectCarcolor} onChange={this.onChangeCarColor.bind(this)}>
-                      <option value="select car color">select car color</option>
-                      <option value="Red">Red</option>
-                      <option value="Black">Black</option>
-                      <option value="Green">Green</option>
-                      <option value="Yellow">Yellow</option>
-                      <option value="Grey">Grey</option>
-                      <option value="Blue">Blue</option>
-                    </select>
-                </div>]:""}{this.state.ShowingCar?
-                    [
+                      <label>Color</label>
+                      <select value={this.state.selectCarcolor} onChange={this.onChangeCarColor.bind(this)}>
+                        <option value="select car color">select car color</option>
+                        <option value="Red">Red</option>
+                        <option value="Black">Black</option>
+                        <option value="Green">Green</option>
+                        <option value="White">White</option>
+                        <option value="Grey">Grey</option>
+                        <option value="Blue">Blue</option>
+                      </select>
+                  </div>,
                     <div className = "editor__item">
                         <label>Model</label>
                         <input type="checkbox" name="cars" value="model" onChange={this.onChangeCar.bind(this)} />
@@ -157,7 +163,7 @@ onChangeCarColor(e){
                         <label>Registration N° </label>
                         <input type="checkbox" name="cars" value="registrationNo" onChange={this.onChangeCar.bind(this)} />
                     </div>,
-                    
+                   
                 <div className = "editor__item">
                     <label>Insurance Price</label>
                     <input type="checkbox" name="cars" value="insurancePrice" onChange={this.onChangeCar.bind(this)} />
@@ -169,40 +175,40 @@ onChangeCarColor(e){
             <div className = "editor__item">
                 <label>Year of manufacture </label>
                 <input type="checkbox" name="cars" value="manufactureYear" onChange={this.onChangeCar.bind(this)} />
-            </div> ,
-             <h3> Users</h3>,
-             <div className = "editor__item">
-               <label>Full Name</label>
-               <input type="checkbox"  value= "name" onChange={this.onChange.bind(this)} />
-             </div>,
-             <div className = "editor__item">
-               <label>Email</label>
-               <input type="checkbox" value="email" onChange={this.onChange.bind(this)} />
-             </div>,
-             <div className = "editor__item">
-               <label>Age</label>
-               <input type="checkbox" value="age" onChange={this.onChange.bind(this)} />
-             </div>,
-             <div className = "editor__item">
-               <label>Salary</label>
-               <input type="checkbox" value= "salary" onChange={this.onChange.bind(this)} />
-             </div>,
-             <div className = "editor__item">
-               <label>Household</label>
-               <input type="checkbox" value= "household" onChange={this.onChange.bind(this)} />
-             </div>
+            </div> 
                     ]:""}
                 </div>  
               </div>
             </form>
           </div>
-           
-               
+          <div className = "editor">
+            <form name ="myform">
+                <h3> Users</h3>
+                  <div className = "editor__item">
+                    <label>Full Name</label>
+                    <input type="checkbox"  value= "name" onChange={this.onChange.bind(this)} />
+                  </div>
+                  <div className = "editor__item">
+                    <label>Email</label>
+                    <input type="checkbox" value="email" onChange={this.onChange.bind(this)} />
+                  </div>
+                  <div className = "editor__item">
+                    <label>Age</label>
+                    <input type="checkbox" value="age" onChange={this.onChange.bind(this)} />
+                  </div>
+                  <div className = "editor__item">
+                    <label>Salary</label>
+                    <input type="checkbox" value= "salary" onChange={this.onChange.bind(this)} />
+                  </div>
+                  <div className = "editor__item">
+                    <label>Household</label>
+                    <input type="checkbox" value= "household" onChange={this.onChange.bind(this)} />
+                  </div>
                  
-              
-              
+              </form>
+            
             </div>
-          
+           
         </div>
 
         <div className="col-xs-12 col-sm-8 col-md-8 col-lg-9">
