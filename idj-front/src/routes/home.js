@@ -51,7 +51,7 @@ class Home extends Component {
                 </nav>
               </div>
             </div>
-            <div className='home__subtitle'>A Financial Data Visualisation Engine</div>
+            <div className='home__subtitle'>A Data Visualisation Engine</div>
             <div className="home__button">
               <a href='/dashboard'>Access the Dashboard</a>
             </div>

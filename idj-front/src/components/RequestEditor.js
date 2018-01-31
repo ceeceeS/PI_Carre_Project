@@ -94,7 +94,7 @@ onChangeCarColor(e){
  // optionsCars.splice(index, 1)
 
     console.log("color "+this.state.selectCarcolor);
-}
+  }
 
   displayCarOption(e)
   {
@@ -220,50 +220,6 @@ onChangeCarColor(e){
     )
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const Cquery =  gql` query getAllUsers($color: String!){
-//     getAllUsers(color: $color) {
-//     name
-//     email
-//     age
-//     salary
-//     household 
-//     cars{
-//       _id
-//       model
-//       registrationNo
-//       carColor 
-//       insurancePrice 
-//       kilometer 
-//       manufactureYear
-      
-//     }
-//   }
-// }
-// `
-// ;
-// const datafetch = graphql(Cquery,{
-//   // The variable $keyword for the query is computed from the
-//   // React props passed to this container.
-//   options: {
-//     variables: { color: "this.state.selectCarcolor"},
-    
-//   }
-// })
-//jdjdj
 
 
 export default RequestEditor;

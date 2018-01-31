@@ -21,6 +21,7 @@ class RequestResult extends Component {
         var cols = [];
         var rows = [];
         var result = [[]];
+        var items = [];
         //var dataset = [];
         //var json = [];
     
@@ -28,8 +29,12 @@ class RequestResult extends Component {
         //console.log(optionsCars)
         this.props.stateEditor.options.map(function(title){
           cols.push(title);
+          items.push(title);
         })
-    
+        optionsCars.map(function(title){
+          items.push(title);
+        })
+        console.log(items)
         this.props.data.getAllUsers.map(function(row){
           rows.push(row);
         })
@@ -78,7 +83,7 @@ class RequestResult extends Component {
                     </div>
 
                     <Route exact path="/dashboard" component={RawData}/>
-                    <Route exact path="/dashboard/graph" render={() => (<Graph data={rows}/>)}/>
+                    <Route exact path="/dashboard/graph" render={() => (<Graph data={rows} itemsChecked={items}/>)}/>
                 </div>
             </Router>
         );

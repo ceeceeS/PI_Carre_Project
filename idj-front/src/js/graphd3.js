@@ -74,7 +74,12 @@ export default class Graph extends Component {
           .attr("y", function(d) {return d[1]*6;})
           .attr("font-family", "Montserrat")
           .attr("font-size", "12px")
-          .attr("fill", "black");
+          .attr("fill", "black")
+      
+      svg.append("text")
+          .attr("class", "caption")
+          .attr("transform","translate(0,20)")
+          .text("Salary in function of Age");
   }
 
   graphe(jsonData){
@@ -144,8 +149,13 @@ export default class Graph extends Component {
         .attr("width", x.bandwidth())
         .attr("y", function(d) { return y(d.cars.length); })
         .attr("height", function(d) { return height - y(d.cars.length); });
+    svg.append("text")
+          .attr("class", "caption")
+          .attr("transform","translate(0,-10)")
+          .text("Number of Cars by User");
 
     });
+    
   }
 
   //diagram: Insurance Price / User's age
@@ -354,18 +364,170 @@ export default class Graph extends Component {
             .attr('dy','.71em')
             .style('text-anchor','end')
             .text('Insurance Price')
+
+        svg.append("text")
+          .attr("class", "caption")
+          .attr("transform","translate(0,-30)")
+          .text("Insurance Price in function of Salary");
       })
+      
 
   }
 
 
   //Visualisation when email or/and name checked
+  bubbleDisplay(jsonData){
+      var jsonArray = [];
 
+        // Variables
+        var margin = {top: 0, right: 0, bottom: 0, left: 0},
+        width = 960 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
+        
+        var rect = [50,50, width - 50, height - 50];
+        
+        var n = 20,
+        m = 4,
+        padding = 6,
+        maxSpeed = 3,
+        radius = d3.scaleSqrt().range([0, 8]),
+        color = d3.scaleOrdinal(d3.schemeCategory10).domain(d3.range(m));
+        var nodes = [];
+
+        // load the data
+        d3.json(jsonData, function( data) {
+            jsonData.forEach(function(d) {
+              d.cars.forEach(function(c) {
+                d = JSON.stringify(d);
+                d = JSON.parse(d);
+                c = JSON.stringify(c);
+                c = JSON.parse(c);
+                //console.log(d);
+                console.log(d.cars.length)
+                jsonArray.push({"name": d.name, "age": d.age,"salary": d.salary, "household": d.household,
+                "d.cars.length": d.cars.length, "insurancePrice": c.insurancePrice,"model": c.model,"kilometer": c.kilometer});
+              })
+            });
+
+            jsonArray.forEach(function(d) {
+              d.name=d.name;
+              d.age=d.age;
+              d.salary=d.salary; 
+              d.household=d.household;
+            });
+
+        for (var i in d3.range(n)){
+          nodes.push({radius: radius(1 + Math.floor(Math.random() * 4)),
+          color: color(Math.floor(Math.random() * m)),
+          x: rect[0] + (Math.random() * (rect[2] - rect[0])),
+          y:rect[1] + (Math.random() * (rect[3] - rect[1])),
+          speedX: (Math.random() - 0.5) * 2 *maxSpeed,
+          speedY: (Math.random() - 0.5) * 2 *maxSpeed});
+        }
+        
+        
+        var force = d3.forceSimulation()
+            .force("link", d3.forceLink().id(function(d) { return d.index }))
+            .force("collide",d3.forceCollide( function(d){return d.r + 8 }).iterations(16) )
+            .force("charge", d3.forceManyBody())
+            .force("center", d3.forceCenter(width, height))
+            .force("y", d3.forceY(0))
+            .force("x", d3.forceX(0))
+            //.on("tick", tick)
+        
+        /*d3.forceSimulation()
+          .nodes(nodes)
+          .size([width, height])
+          .gravity(0)
+          .charge(0)
+          .on("tick", tick)
+        .start();*/
+        
+        var svg = d3.select(".bubble")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        
+        svg.append("svg:rect")
+          .attr("width", rect[2] - rect[0])
+          .attr("height", rect[3] - rect[1])
+          .attr("x", rect[0])
+          .attr("y", rect[1])
+          .style("fill", "None")
+          .style("stroke", "#222222");
+        
+        var circle = svg.selectAll("circle")
+          .data(nodes)
+          .enter()
+          .append("circle")
+          .attr("r", 15+"px")
+          .attr("cx", function(d) { return d.x; })
+          .attr("cy", function(d) { return d.y; })
+          .style("fill", function(d) { return d.color; })
+          .call(d3.drag());
+        
+        var flag = false;
+        function tick(e) {
+          force.alpha(0.1)
+          circle
+          .each(gravity(e.alpha))
+          .each(collide(.5))
+          .attr("cx", function(d) { return d.x; })
+          .attr("cy", function(d) { return d.y; });
+        }
+        
+        // Move nodes toward cluster focus.
+        function gravity(alpha) {
+          return function(d) {
+            if ((d.x - d.radius - 2) < rect[0]) d.speedX = Math.abs(d.speedX);
+            if ((d.x + d.radius + 2) > rect[2]) d.speedX = -1 * Math.abs(d.speedX);
+            if ((d.y - d.radius - 2) < rect[1]) d.speedY = -1 * Math.abs(d.speedY);
+            if ((d.y + d.radius + 2) > rect[3]) d.speedY = Math.abs(d.speedY);
+            
+            d.x = d.x + (d.speedX * alpha);
+            d.y = d.y + (-1 * d.speedY * alpha);
+          };
+        }
+        
+        // Resolve collisions between nodes.
+        function collide(alpha) {
+          var quadtree = d3.quadtree(nodes);
+          return function(d) {
+            var r = d.radius + radius.domain()[1] + padding,
+            nx1 = d.x - r,
+            nx2 = d.x + r,
+            ny1 = d.y - r,
+            ny2 = d.y + r;
+            quadtree.visit(function(quad, x1, y1, x2, y2) {
+            if (quad.point && (quad.point !== d)) {
+              var x = d.x - quad.point.x,
+              y = d.y - quad.point.y,
+              l = Math.sqrt(x * x + y * y),
+              r = d.radius + quad.point.radius + (d.color !== quad.point.color) * padding;
+              if (l < r) {
+                l = (l - r) / l * alpha;
+                d.x -= x *= l;
+                d.y -= y *= l;
+                quad.point.x += x;
+                quad.point.y += y;
+                }
+            }
+            return x1 > nx2
+              || x2 < nx1
+              || y1 > ny2
+              || y2 < ny1;
+            });
+          };
+        }
+      })
+  }
 
 
   render() {
     var datas = this.props.data;
     var dataArray = [];
+    console.log(this.props.itemsChecked);
     datas.map(function(data,i){
       dataArray.push([data.salary, data.age, data.household, data.cars.length])
     })
@@ -391,22 +553,26 @@ export default class Graph extends Component {
         <div className="graphs">
             {this.props.itemsChecked.includes("age") ? (
               [<svg className="graphs__scatterplot">{this.salarybyAge(dataArray)}</svg>,
-              <svg className="diagram">{this.createDiagram(data)}</svg>]
+              /*<svg className="diagram">{this.createDiagram(data)}</svg>*/]
             ):(<div></div>)}
             {this.props.itemsChecked.includes("insurancePrice") ? (
               [<svg className="scatterplot">{this.scatterplot(data)}</svg>,
-              <svg className="diagram">{this.createDiagram(data)}</svg>]
+              /*<svg className="diagram">{this.createDiagram(data)}</svg>*/]
             ):(<div></div>)}
             {this.props.itemsChecked.includes("salary") ? (
-              [<svg className="scatterplot">{this.scatterplot(data)}</svg>,
+            [<svg className="scatterplot">{this.scatterplot(data)}</svg>,
               <svg className="graphs__scatterplot">{this.salarybyAge(dataArray)}</svg>]
             ):(<div></div>)}
             {this.props.itemsChecked.includes("cars") ? (
               [<svg className="bar">{this.graphe(data)}</svg>]
             ):(<div></div>)}
             {this.props.itemsChecked.includes("name") ? (
-              [<svg className="bar">{this.graphe(data)}</svg>]
+              [<svg className="bar">{this.graphe(data)}</svg>,
+              /*<svg className="bubble">{this.bubbleDisplay(data)}</svg>*/]
             ):(<div></div>)}
+            {/*this.props.itemsChecked.includes("email") ? (
+              [<svg className="bubble">{this.bubbleDisplay(data)}</svg>]
+            ):(<div></div>)*/}
         </div>
       )
   }
