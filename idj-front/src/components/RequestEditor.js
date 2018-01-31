@@ -21,6 +21,7 @@ class RequestEditor extends Component {
       options: [],
       optionsCars : [],
       selectCarcolor:'',
+      ShowingCar: false,
       showing : false
     }
 
@@ -75,8 +76,11 @@ class RequestEditor extends Component {
   }
 
 onChangeCarColor(e){
+  const ShowingCar = this.state.ShowingCar
+  //if(e.target.name == colors)
   //const selectCarcolor = this.state.selectCarcolor
-  this.setState({ selectCarcolor:e.target.value})
+  this.setState({ selectCarcolor:e.target.value, ShowingCar:!ShowingCar})
+  
 
     console.log("color "+this.state.selectCarcolor);
 }
@@ -110,6 +114,7 @@ onChangeCarColor(e){
     console.log("jdjdj"+this);
    // const selectCarcolor = this.props.selectedoptions
    const {showing} = this.state;
+   const {ShowingCar} = this.state;
    const {selectCarcolor} = this.state;
   console.log("ehehhe "+ this.state.selectCarcolor);
     return (
@@ -139,7 +144,8 @@ onChangeCarColor(e){
                       <option value="Grey">Grey</option>
                       <option value="Blue">Blue</option>
                     </select>
-                </div>,
+                </div>]:""}{this.state.ShowingCar?
+                    [
                     <div className = "editor__item">
                         <label>Model</label>
                         <input type="checkbox" name="cars" value="model" onChange={this.onChangeCar.bind(this)} />
