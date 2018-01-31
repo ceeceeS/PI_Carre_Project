@@ -51,7 +51,6 @@ class RequestEditor extends Component {
   onChangeCar(e) {
     // current array of options
     const optionsCars = this.state.optionsCars
-    const selectCarcolor = this.state.selectCarcolor
     
     let index;
 
@@ -69,6 +68,10 @@ class RequestEditor extends Component {
 
     // update the state with the new array of optionsCars
     this.setState({ optionsCars: optionsCars})
+    this.setState({ selectCarcolor: e.target.value})
+    console.log(optionsCars)
+    console.log(e.target.value);
+    console.log("couleur "+ this.state.selectCarcolor);
     //this.setState({ selectCarcolor:e.target.value})
     //console.log("coleur "+this.state.selectCarcolor);
   
