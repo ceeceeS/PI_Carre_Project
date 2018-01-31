@@ -560,12 +560,11 @@ export default class Graph extends Component {
               /*<svg className="diagram">{this.createDiagram(data)}</svg>*/]
             ):(<div></div>)}
             {this.props.itemsChecked.includes("salary") ? (
-            [/*<svg className="scatterplot">{this.scatterplot(data)}</svg>,*/
+            [<svg className="scatterplot">{this.scatterplot(data)}</svg>,
               <svg className="graphs__scatterplot">{this.salarybyAge(dataArray)}</svg>]
             ):(<div></div>)}
             {this.props.itemsChecked.includes("cars") ? (
-              [<svg className="bar">{this.graphe(data)}</svg>,
-              <svg className="scatterplot">{this.scatterplot(data)}</svg>]
+              [<svg className="bar">{this.graphe(data)}</svg>]
             ):(<div></div>)}
             {this.props.itemsChecked.includes("name") ? (
               [<svg className="bar">{this.graphe(data)}</svg>,
