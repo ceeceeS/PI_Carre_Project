@@ -700,12 +700,6 @@ var jsonArray = [];
       x.domain([1970, d3.max(jsonArray, function(d) { return d.manufactureYear; })]);
       y.domain([0, d3.max(jsonArray, function(d) { return d.insurancePrice; })]);
 
-      // add the valueline path.
-      svg.append("path")
-         .data([jsonArray])
-         .attr("class", "line")
-         .attr("d", valueline);
-
       // add the dots with tooltips
       svg.selectAll("dot")
          .data(jsonArray)
