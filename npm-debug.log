@@ -12,23 +12,36 @@
 9 verbose lifecycle A5_pi_carre@1.0.0~start: PATH: C:\Users\dufou\AppData\Roaming\npm\node_modules\npm\bin\node-gyp-bin;C:\Users\dufou\Documents\PROJET\PI_Carre_Project\node_modules\.bin;C:\oraclexe\app\oracle\product\11.2.0\server\bin;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\Program Files\Java\jdk1.8.0_101/bin;C:\Users\dufou\OneDrive\Documents\apache-maven-3.3.9/bin;C:\wamp64\bin\php\php7.0.10;C:\Program Files (x86)\Bitvise SSH Client;C:\ProgramData\ComposerSetup\bin;C:\wamp64\bin\php;C:\Program Files (x86)\Skype\Phone\;C:\Program Files (x86)\Windows Live\Shared;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Users\dufou\AppData\Local\Programs\Python\Python37\Scripts\;C:\Users\dufou\AppData\Local\Programs\Python\Python37\;C:\Users\dufou\AppData\Local\Microsoft\WindowsApps;C:\Users\dufou\AppData\Roaming\Composer\vendor\bin;C:\Users\dufou\.babun;C:\Users\dufou\AppData\Roaming\npm;C:\Users\dufou\AppData\Local\Yarn\bin;
 10 verbose lifecycle A5_pi_carre@1.0.0~start: CWD: C:\Users\dufou\Documents\PROJET\PI_Carre_Project
 11 silly lifecycle A5_pi_carre@1.0.0~start: Args: [ '/d /s /c', 'nodemon server.js --exec babel-node' ]
-12 verbose stack Error: kill ENOSYS
-12 verbose stack     at Object._errnoException (util.js:1031:13)
-12 verbose stack     at process.kill (internal/process.js:173:18)
-12 verbose stack     at process.listener (C:\Users\dufou\AppData\Roaming\npm\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:95:15)
-12 verbose stack     at emitNone (events.js:115:13)
-12 verbose stack     at process.emit (events.js:218:7)
-12 verbose stack     at processEmit (C:\Users\dufou\AppData\Roaming\npm\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:155:32)
-12 verbose stack     at Signal.wrap.onsignal (internal/process.js:198:44)
-13 verbose cwd C:\Users\dufou\Documents\PROJET\PI_Carre_Project
-14 error Windows_NT 10.0.16299
-15 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Users\\dufou\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "start"
-16 error node v9.0.0
-17 error npm  v4.1.1
-18 error code ENOSYS
-19 error errno ENOSYS
-20 error syscall kill
-21 error kill ENOSYS
-22 error If you need help, you may report this error at:
-22 error     <https://github.com/npm/npm/issues>
-23 verbose exit [ 1, true ]
+12 silly lifecycle A5_pi_carre@1.0.0~start: Returned: code: 3221225786  signal: null
+13 info lifecycle A5_pi_carre@1.0.0~start: Failed to exec start script
+14 verbose stack Error: A5_pi_carre@1.0.0 start: `nodemon server.js --exec babel-node`
+14 verbose stack Exit status 3221225786
+14 verbose stack     at EventEmitter.<anonymous> (C:\Users\dufou\AppData\Roaming\npm\node_modules\npm\lib\utils\lifecycle.js:279:16)
+14 verbose stack     at emitTwo (events.js:135:13)
+14 verbose stack     at EventEmitter.emit (events.js:224:7)
+14 verbose stack     at ChildProcess.<anonymous> (C:\Users\dufou\AppData\Roaming\npm\node_modules\npm\lib\utils\spawn.js:40:14)
+14 verbose stack     at emitTwo (events.js:135:13)
+14 verbose stack     at ChildProcess.emit (events.js:224:7)
+14 verbose stack     at maybeClose (internal/child_process.js:943:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:220:5)
+15 verbose pkgid A5_pi_carre@1.0.0
+16 verbose cwd C:\Users\dufou\Documents\PROJET\PI_Carre_Project
+17 error Windows_NT 10.0.16299
+18 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Users\\dufou\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "start"
+19 error node v9.0.0
+20 error npm  v4.1.1
+21 error code ELIFECYCLE
+22 error A5_pi_carre@1.0.0 start: `nodemon server.js --exec babel-node`
+22 error Exit status 3221225786
+23 error Failed at the A5_pi_carre@1.0.0 start script 'nodemon server.js --exec babel-node'.
+23 error Make sure you have the latest version of node.js and npm installed.
+23 error If you do, this is most likely a problem with the A5_pi_carre package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     nodemon server.js --exec babel-node
+23 error You can get information on how to open an issue for this project with:
+23 error     npm bugs A5_pi_carre
+23 error Or if that isn't available, you can get their info via:
+23 error     npm owner ls A5_pi_carre
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]

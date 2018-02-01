@@ -15,12 +15,35 @@
 }
 svg.bar{
   width: 100%;
-  height: 400px;
+  height: 500px;
 }
 
 .bar:hover{
   fill: brown;
 }
+
+.graphbar{
+  fill: steelblue;
+}
+svg.graphbar{
+  width: 100%;
+  height: 500px;
+}
+
+.graphbar:hover{
+  fill: brown;
+}
+
+svg.linescatterplot{
+  width: 100%;
+  height: 500px;
+}
+
+.linescatterplot:hover{
+  fill: brown;
+}
+
+
 
 .axisBottom, .axisLeft {
   font: 10px sans-serif;
@@ -67,3 +90,21 @@ svg .caption{
   text-align: center;
 }
     
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 60px;
+  height: 28px;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: lightsteelblue;
+  border: 0px;
+  border-radius: 8px;
+}

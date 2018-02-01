@@ -84,9 +84,9 @@ export default class Graph extends Component {
 
   graphe(jsonData){
   // set the dimensions of the canvas
-  var margin = {top: 20, right: 20, bottom: 70, left: 40},
-      width = 600 - margin.left - margin.right,
-      height = 300 - margin.top - margin.bottom;
+      var margin = {top: 50, right: 70, bottom: 100, left: 50},
+        width = 960 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
 
   // set the ranges
   var x = d3.scaleBand().rangeRound([0, width]).padding(0.05);
@@ -99,8 +99,11 @@ export default class Graph extends Component {
 
   // add the SVG element
   var svg = d3.select(".bar").append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+      //.attr("width", width + margin.left + margin.right)
+      //.attr("height", height + margin.top + margin.bottom)
+      .attr("preserveAspectRatio", "xMinYMin meet")
+      .attr("viewBox", "0 0 1000 500")
+
     .append("g")
       .attr("transform", 
             "translate(" + margin.left + "," + margin.top + ")");
@@ -110,7 +113,6 @@ export default class Graph extends Component {
       jsonData.forEach(function(d) {
           d = JSON.stringify(d);
           d = JSON.parse(d);
-          console.log(d);
           d.name = d.name;
           d.cars.length = d.cars.length;
       });
@@ -148,7 +150,25 @@ export default class Graph extends Component {
         .attr("x", function(d) { return x(d.name); })
         .attr("width", x.bandwidth())
         .attr("y", function(d) { return y(d.cars.length); })
-        .attr("height", function(d) { return height - y(d.cars.length); });
+        .attr("height", function(d) { return height - y(d.cars.length); })
+        .on('mouseover', function () {
+              d3.select(this)
+                .transition()
+                .duration(500)
+                .attr('r',20)
+                .attr('stroke-width',3)
+            })
+            .on('mouseout', function () {
+              d3.select(this)
+                .transition()
+                .duration(500)
+                .attr('r',10)
+                .attr('stroke-width',1)
+            })
+          .append('title') // Tooltip
+              .text(function (d) { return '\nAge: ' + d.age +
+                                  '\nSalaire: ' + d.salary +
+                                  '\nEmail: ' + d.email  });
     svg.append("text")
           .attr("class", "caption")
           .attr("transform","translate(0,-10)")
@@ -180,7 +200,6 @@ export default class Graph extends Component {
       data.forEach(function(d) {
          d = JSON.stringify(d);
          d = JSON.parse(d);
-         console.log(d.cars[0].insurancePrice);
          d.age = d.age;
          d.cars[0].insurancePrice = d.cars[0].insurancePrice;
         });
@@ -263,9 +282,9 @@ export default class Graph extends Component {
 
           // Variables
         //var body = d3.select('body')
-        var margin = { top: 50, right: 50, bottom: 50, left: 50 }
-        var h = 500 - margin.top - margin.bottom
-        var w = 500 - margin.left - margin.right
+      var margin = {top: 50, right: 70, bottom: 100, left: 50},
+        w = 960 - margin.left - margin.right,
+        h = 500 - margin.top - margin.bottom;
 
         // load the data
         d3.json(jsonData, function( data) {
@@ -275,8 +294,8 @@ export default class Graph extends Component {
                 d = JSON.parse(d);
                 c = JSON.stringify(c);
                 c = JSON.parse(c);
-                //console.log(d);
-                jsonArray.push({"salary": d.salary, "insurancePrice": c.insurancePrice});
+                jsonArray.push({"name": d.name, "age": d.age,"salary": d.salary, "household": d.household,
+                "d.cars.length": d.cars.length, "insurancePrice": c.insurancePrice,"model": c.model,"kilometer": c.kilometer});
               })
             });
 
@@ -302,8 +321,10 @@ export default class Graph extends Component {
 
         // SVG
         var svg = d3.select('.scatterplot')
-            .attr('height',h + margin.top + margin.bottom)
-            .attr('width',w + margin.left + margin.right)
+            //.attr('height',h + margin.top + margin.bottom)
+            //.attr('width',w + margin.left + margin.right)
+            .attr("preserveAspectRatio", "xMinYMin meet")
+          .attr("viewBox", "0 0 1000 500")
           .append('g')
             .attr('transform','translate(' + margin.left + ',' + margin.top + ')')
         // X-axis
@@ -370,9 +391,113 @@ export default class Graph extends Component {
           .attr("transform","translate(0,-30)")
           .text("Insurance Price in function of Salary");
       })
-      
-
   }
+
+  //model en fonction de household
+  grapheBar(jsonData){
+var jsonArray = [];
+
+  // set the dimensions of the canvas
+  var margin = {top: 50, right: 70, bottom: 100, left: 50},
+        width = 960 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
+
+  // set the ranges
+  var x = d3.scaleBand().rangeRound([0, width]).padding(0.05);
+  var y = d3.scaleLinear().range([height, 0]);
+
+  // define the axis
+  var xAxis = d3.axisBottom(x)
+  var yAxis = d3.axisLeft(y)
+      .ticks(10);
+
+  // add the SVG element
+  var svg = d3.select(".graphbar").append("svg")
+      //.attr("width", width + margin.left + margin.right)
+      //.attr("height", height + margin.top + margin.bottom)
+      .attr("preserveAspectRatio", "xMinYMin meet")
+      .attr("viewBox", "0 0 1000 500")
+    .append("g")
+      .attr("transform", 
+            "translate(" + margin.left + "," + margin.top + ")");
+
+  // load the data
+        d3.json(jsonData, function( data) {
+            jsonData.forEach(function(d) {
+              d.cars.forEach(function(c) {
+                d = JSON.stringify(d);
+                d = JSON.parse(d);
+                c = JSON.stringify(c);
+                c = JSON.parse(c);
+                jsonArray.push({"name": d.name, "age": d.age,"salary": d.salary, "household": d.household,
+                "d.cars.length": d.cars.length, "insurancePrice": c.insurancePrice,"model": c.model,"kilometer": c.kilometer});
+              })
+            });
+    
+    // scale the range of the data
+    x.domain(jsonArray.map(function(d) { return d.model; }));
+    y.domain([0, d3.max(jsonArray, function(d) { return d.household; })]);
+
+    // add axis
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+      .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", "-.55em")
+        .attr("transform", "rotate(-90)" );
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+      .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 5)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Nb of people in the household");
+
+    // Add bar chart
+    svg.selectAll(".graphbar")
+        .data(jsonArray)
+      .enter().append("rect")
+        .attr("class", "graphbar")
+        .attr("x", function(d) { return x(d.model); })
+        .attr("width", x.bandwidth())
+        .attr("y", function(d) { return y(d.household); })
+        .attr("height", function(d) { return height - y(d.household); })
+        .on('mouseover', function () {
+              d3.select(this)
+                .transition()
+                .duration(500)
+                .attr('r',20)
+                .attr('stroke-width',3)
+            })
+            .on('mouseout', function () {
+              d3.select(this)
+                .transition()
+                .duration(500)
+                .attr('r',10)
+                .attr('stroke-width',1)
+            })
+          .append('title') // Tooltip
+              .text(function (d) { return '\nInsurance Price: ' + d.insurancePrice +
+                                  '\nCar model: ' + d.model +
+                                  '\nNb of kilometers: ' + d.kilometer  });
+
+    svg.append("text")
+          .attr("class", "caption")
+          .attr("transform","translate(0,-10)")
+          .text("Number of people in the household by car model");
+
+    });
+    
+  }
+
+
+
 
 
   //Visualisation when email or/and name checked
@@ -402,8 +527,6 @@ export default class Graph extends Component {
                 d = JSON.parse(d);
                 c = JSON.stringify(c);
                 c = JSON.parse(c);
-                //console.log(d);
-                console.log(d.cars.length)
                 jsonArray.push({"name": d.name, "age": d.age,"salary": d.salary, "household": d.household,
                 "d.cars.length": d.cars.length, "insurancePrice": c.insurancePrice,"model": c.model,"kilometer": c.kilometer});
               })
@@ -520,21 +643,120 @@ export default class Graph extends Component {
             });
           };
         }
-      })
+    })
+  }
+
+  //insurance price en fonction de manufacture year
+  lineScatterPlot(jsonData){
+    var jsonArray=[];
+
+    // set the dimensions and margins of the graph
+    var margin = {top: 50, right: 70, bottom: 100, left: 50},
+        width = 960 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
+
+    // set the ranges
+    var x = d3.scaleLinear().range([0, width]);
+    var y = d3.scaleLinear().range([height, 0]);
+
+    // load the data
+        d3.json(jsonData, function(data) {
+            jsonData.forEach(function(d) {
+              d.cars.forEach(function(c) {
+                d = JSON.stringify(d);
+                d = JSON.parse(d);
+                c = JSON.stringify(c);
+                c = JSON.parse(c);
+                jsonArray.push({"model": c.model, "kilometer": c.kilometer, "manufactureYear": c.manufactureYear, "insurancePrice": c.insurancePrice});
+              })
+            });
+
+            jsonArray.forEach(function(d) {
+              d.manufactureYear = d.manufactureYear;
+              d.insurancePrice = +d.insurancePrice;
+            });
+    // define the line
+    var valueline = d3.line()
+        .x(function(d) { return x(d.manufactureYear); })
+        .y(function(d) { return y(d.insurancePrice); });
+
+    var div = d3.select(".linescatterplot").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
+    // append the svg obgect to the body of the page
+    // appends a 'group' element to 'svg'
+    // moves the 'group' element to the top left margin
+    var svg = d3.select(".linescatterplot").append("svg")
+        //.attr("width", width + margin.left + margin.right)
+        //.attr("height", height + margin.top + margin.bottom)
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", "0 0 1000 500")
+      .append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + margin.top + ")");
+
+      // scale the range of the data
+      x.domain([1970, d3.max(jsonArray, function(d) { return d.manufactureYear; })]);
+      y.domain([0, d3.max(jsonArray, function(d) { return d.insurancePrice; })]);
+
+      // add the valueline path.
+      svg.append("path")
+         .data([jsonArray])
+         .attr("class", "line")
+         .attr("d", valueline);
+
+      // add the dots with tooltips
+      svg.selectAll("dot")
+         .data(jsonArray)
+       .enter().append("circle")
+         .attr("r", 5)
+         .attr("cx", function(d) { return x(d.manufactureYear); })
+         .attr("cy", function(d) { return y(d.insurancePrice); })
+         .on('mouseover', function () {
+              d3.select(this)
+                .transition()
+                .duration(500)
+                .attr('r',20)
+                .attr('stroke-width',3)
+            })
+            .on('mouseout', function () {
+              d3.select(this)
+                .transition()
+                .duration(500)
+                .attr('r',10)
+                .attr('stroke-width',1)
+            })
+          .append('title') // Tooltip
+              .text(function (d) { return '\nInsurance Price: ' + d.insurancePrice +
+                                  '\nCar model: ' + d.model +
+                                  '\nNb of kilometers: ' + d.kilometer  });
+
+      // add the X Axis
+      svg.append("g")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x));
+
+      // add the Y Axis
+      svg.append("g")
+          .call(d3.axisLeft(y));
+
+      svg.append("text")
+          .attr("class", "caption")
+          .attr("transform","translate(0,-10)")
+          .text("Insurance price by manufacture year");
+
+    });
   }
 
 
   render() {
     var datas = this.props.data;
     var dataArray = [];
-    console.log(this.props.itemsChecked);
     datas.map(function(data,i){
       dataArray.push([data.salary, data.age, data.household, data.cars.length])
     })
     var data = this.props.data;
-    //console.log(data);
-    //var dt = this.props.json;
-    //console.log(this.props.json)
     const dataset = [
                   [ 5,     20 ],
                   [ 480,   90 ],
@@ -564,7 +786,9 @@ export default class Graph extends Component {
               <svg className="graphs__scatterplot">{this.salarybyAge(dataArray)}</svg>]
             ):(<div></div>)}
             {this.props.itemsChecked.includes("cars") ? (
-              [<svg className="bar">{this.graphe(data)}</svg>]
+              [<svg className="bar">{this.graphe(data)}</svg>,
+              <svg className="graphbar">{this.grapheBar(data)}</svg>,
+              <svg className="linescatterplot">{this.lineScatterPlot(data)}</svg>]
             ):(<div></div>)}
             {this.props.itemsChecked.includes("name") ? (
               [<svg className="bar">{this.graphe(data)}</svg>,
@@ -573,6 +797,18 @@ export default class Graph extends Component {
             {/*this.props.itemsChecked.includes("email") ? (
               [<svg className="bubble">{this.bubbleDisplay(data)}</svg>]
             ):(<div></div>)*/}
+            {this.props.itemsChecked.includes("insurancePrice") ? (
+              [<svg className="linescatterplot">{this.lineScatterPlot(data)}</svg>]
+            ):(<div></div>)}
+            {this.props.itemsChecked.includes("manufactureYear") ? (
+              [<svg className="linescatterplot">{this.lineScatterPlot(data)}</svg>]
+            ):(<div></div>)}
+            {this.props.itemsChecked.includes("model") ? (
+              [<svg className="graphbar">{this.grapheBar(data)}</svg>]
+            ):(<div></div>)}
+            {this.props.itemsChecked.includes("household") ? (
+              [<svg className="graphbar">{this.grapheBar(data)}</svg>]
+            ):(<div></div>)}
         </div>
       )
   }

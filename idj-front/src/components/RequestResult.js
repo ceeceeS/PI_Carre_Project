@@ -26,7 +26,6 @@ class RequestResult extends Component {
         //var json = [];
     
         var optionsCars = this.props.stateEditor.optionsCars;
-        //console.log(optionsCars)
         this.props.stateEditor.options.map(function(title){
           cols.push(title);
           items.push(title);
@@ -34,19 +33,15 @@ class RequestResult extends Component {
         optionsCars.map(function(title){
           items.push(title);
         })
-        console.log(items)
         this.props.data.getAllUsers.map(function(row){
           rows.push(row);
         })
-        console.log(rows)
     
         var thead = cols.map((col) => col =="cars"?
             optionsCars.map((carItem,j) => <th key={j}>Cars.{carItem}</th>): 
             <th key={col}>{col}</th>
         );
         var tbody = rows.map(function(row,i){
-            //dataset.push(row);
-            //json.push(JSON.stringify(row));
             return (
               <tr key={i}>
                 {cols.map((col,index)=> col =="cars"? /*row[col].length == 0? <td key={index}>test</td>:*/

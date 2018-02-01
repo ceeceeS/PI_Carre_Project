@@ -44,8 +44,6 @@ class RequestEditor extends Component {
     }
     // update the state with the new array of options
     this.setState({ options: options})
-   
-    console.log(options);
   }
 
   onChangeCar(e) {
@@ -58,7 +56,6 @@ class RequestEditor extends Component {
     if (e.target.checked ) {
        // add the numerical value of the checkbox to options array
        optionsCars.push(e.target.value)
-       console.log(e.target.value)
        // userItem = (user,i)=> key={i}> for (option in options) {{user.option},}
     } else {
       // or remove the value from the unchecked checkbox from the array
@@ -68,14 +65,6 @@ class RequestEditor extends Component {
 
     // update the state with the new array of optionsCars
     this.setState({ optionsCars: optionsCars})
-   
-    // console.log(optionsCars)
-    // console.log(e.target.value);
-   // console.log("couleur "+ this.state.selectCarcolor);
-    //this.setState({ selectCarcolor:e.target.value})
-    //console.log("coleur "+this.state.selectCarcolor);
-  
-    console.log(this.state.optionsCars);
   }
 
 onChangeCarColor(e){
@@ -90,10 +79,6 @@ onChangeCarColor(e){
   optionsCars.push("carColor");
   
   this.setState({ optionsCars:optionsCars})
-  console.log(optionsCars)
- // optionsCars.splice(index, 1)
-
-    console.log("color "+this.state.selectCarcolor);
   }
 
   displayCarOption(e)
@@ -106,7 +91,6 @@ onChangeCarColor(e){
     if (e.target.checked && e.target.value =="cars") {
       // add the numerical value of the checkbox to options array
       options.push(e.target.value)
-      console.log(e.target.value)
       // userItem = (user,i)=> key={i}> for (option in options) {{user.option},}
    } else {
      // or remove the value from the unchecked checkbox from the array
@@ -114,20 +98,14 @@ onChangeCarColor(e){
      options.splice(index, 1)
    }
    
-    this.setState({showing : !showing, optionsCars :[]})
-
-    console.log(options);
-    
+    this.setState({showing : !showing, optionsCars :[]})    
   }
 
   render() {
    
-   // console.log("jdjdj"+this);
-   // const selectCarcolor = this.props.selectedoptions
    const {showing} = this.state;
    const {ShowingCar} = this.state;
    const {selectCarcolor} = this.state;
-  //console.log("ehehhe "+ this.state.selectCarcolor);
     return (
 
       <div className="row">
