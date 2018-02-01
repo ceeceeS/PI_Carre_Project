@@ -1,0 +1,239 @@
+
+type User {
+  _id: String
+  name: String
+  email: String
+  age: Int
+  salary : Float
+  household : Int
+  cars: [ Car ]
+}
+
+input InputUser {
+  name: String!
+  email: String!
+  age: Int!
+  salary : Float!
+  household : Int!
+  
+}
+
+
+
+type Car {
+  _id: String
+  model: String
+  registrationNo: String
+  carColor : String
+  insurancePrice : Float
+  kilometer :Float!
+  manufactureYear: Int
+  owner: User
+}
+
+input InputCar {
+  model: String!
+  registrationNo: String!
+  carColor : String!
+  insurancePrice : Float!
+  kilometer : Float!
+  manufactureYear: Int!
+  owner: String!
+}
+
+
+
+mutation createUser {
+  createUser(user: {name: "Nelson Dumaille", age: 18 , email: "nelson.dumaille@gmail.com", salary: 5017.00, household : 0}) {
+    _id
+    name
+    age
+    email
+    salary
+    household
+  }
+}
+
+
+mutation createUser {
+  createUser(user: {name: "Elisa Bellange", age: 24, email: "elisa.bellange@gmail.com", salary: 23000.35, household : 1}) {
+    _id
+    name
+    age
+    email
+    salary
+    household
+  }
+}
+
+mutation createUser {
+  createUser(user: {name: "David Beau", age: 28, email: "david.beau@live.com", salary: 100500.20,household : 3}) {
+    _id
+    name
+    age
+    email
+    salary
+    household
+  }
+}
+
+mutation createUser {
+  createUser(user: {name: "Julienne Lataste", age: 50, email: "lataste@wanadoo.com", salary: 38009.11, household : 2}) {
+    _id
+    name
+    age
+    email
+    salary
+    household
+  }
+}
+
+mutation createUser {
+  createUser(user: {name: "Celine hynk", age: 46, email: "chynk@gmail.com", salary: 15380.56, household : 1}) {
+    _id
+    name
+    age
+    email
+    salary
+    household
+  }
+}
+
+mutation createUser {
+  createUser(user: {name: "Jeanne name: "Laruche", age: 24, email: "jeanne.laruche@gmail.com", salary: 7000, household : 0}) {
+    _id
+    name
+    age
+    email
+    salary
+    household
+  }
+}
+
+
+mutation createUser {
+  createUser(user: {name: "Mika Montremy", age: 35, email: "mikamontremy@bbox.com", salary: 32000, household : 3}) {
+    _id
+    name
+    age
+    email
+    salary
+    household
+  }
+}
+
+
+mutation createUser {
+  createUser(user: {name: "Edmond Desliot", age: 45, email: "desliot@yahoo.fr", salary: 27000, household : 4}) {
+    _id
+    name
+    age
+    email
+    salary
+   household
+  }
+}
+
+
+****************************************************************************************************************************
+
+
+
+mutation createCar {
+  createCar(car: {model: "Ford", registrationNo:"Appolo", carColor:"Red", insurancePrice : 600.30, kilometer: 200000, manufactureYear: "1995", owner: ""}) {
+    _id
+    model
+    registrationNo
+    carColor  
+    insurancePrice
+    kilometer 
+   manufactureYear
+  }
+}
+
+
+
+mutation createCar {
+  createCar(car: {model: "Ford", registrationNo:"Fiesta",  carColor:"Black", insurancePrice : 1050.80, kilometer: 450000,manufactureYear: 2005, owner: ""}) {
+    _id
+    model
+    registrationNo
+    carColor  
+    insurancePrice
+    kilometer
+    manufactureYear 
+  }
+}
+
+mutation createCar {
+  createCar(car: {model: "Citroen", registrationNo:"C4",  carColor:"Grey", insurancePrice : 1212.12, kilometer: 50000, manufactureYear: 2009, owner: ""}) {
+    _id
+    model
+    registrationNo
+    carColor  
+    insurancePrice 
+    kilometer 
+    manufactureYear
+  }
+}
+
+
+mutation createCar {
+  createCar(car: {model: "BMW", registrationNo:"X6",  carColor:"Blue", insurancePrice : 1600.15, kilometer: 15000, manufactureYear: 2016, owner: ""}) {
+    _id
+    model
+    registrationNo
+    carColor  
+    insurancePrice 
+    kilometer 
+    manufactureYear
+  }
+}
+
+mutation createCar {
+  createCar(car: {model: "BMW", registrationNo:"X6",  carColor:"Blue", insurancePrice : 1495, kilometer: 12000, manufactureYear: 2016, owner: ""}) {
+    _id
+    model
+    registrationNo
+    carColor  
+    insurancePrice 
+    kilometer 
+    manufactureYear
+  }
+}
+
+mutation createCar {
+  createCar(car: {model: "Peugeot", registrationNo:"208",  carColor:"Blue", insurancePrice : 1000.00, kilometer: 35000, manufactureYear: 2013,owner: ""}) {
+    _id
+    model
+    registrationNo
+    carColor  
+    insurancePrice
+    kilometer
+    manufactureYear 
+  }
+}
+
+mutation createCar {
+  createCar(car: {model: "Renault", registrationNo:"Scenic",  carColor:"Grey", insurancePrice : 808.00, kilometer: 23000, manufactureYear: 1995, owner: ""}) {
+    _id
+    model
+    registrationNo
+    carColor  
+    insurancePrice
+    kilometer 
+    manufactureYear 
+}
+}
+
+mutation createCar {
+  createCar(car: {model: "Renault", registrationNo:"Audi",  carColor:"White", insurancePrice :560.17 , kilometer: 345000, manufactureYear: 1985,owner: ""}) {
+    _id
+    model
+    registrationNo
+    carColor  
+    insurancePrice 
+    kilometer 
+    manufactureYear
+  }
+}
