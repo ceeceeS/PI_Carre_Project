@@ -18,7 +18,7 @@
     "body-parser": "^1.18.2",
     "bootstrap": "^4.0.0-beta.2",
     "cors": "^2.8.4",
-    "d3": "^4.12.2",
+    "d3": "^7.6.1",
     "express": "^4.16.2",
     "graphql": "^0.11.7",
     "graphql-server-express": "^1.2.0",
