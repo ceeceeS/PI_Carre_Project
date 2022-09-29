@@ -6,7 +6,7 @@
     "apollo-cache-inmemory": "^1.1.1",
     "apollo-client": "^2.0.3",
     "apollo-link-http": "^1.2.0",
-    "d3": "^4.12.2",
+    "d3": "^7.6.1",
     "graphql": "^0.11.7",
     "graphql-tag": "^2.5.0",
     "graphql-to-json": "^1.1.2",
